@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Cherish&family=Lobster&display=swap');
+
+
+/* *************************** non-Active header ************************ */
+.nav {
+    background-color: #00494a7c;
+    border-bottom: 2px solid #0073ffbb;
+    position: sticky;
+    top:0%;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.brandName {
+    color: blanchedalmond !important;
+    font-family: 'Lobster', cursive;
+    font-size: xx-large;
+}
+
+.navItems {
+    color: blanchedalmond !important; 
+    height: 40px;
+    box-sizing: border-box;
+}
+
+
+
+.navItems:hover {
+    background-color: rgba(255, 255, 255, 0.404) !important;
+    border-bottom: 5px solid black !important;
+}
+
+/* ********************** dropdown menu *************************** */
+
+.dropMenu{
+    background-color:#00494a7c !important;
+}
+
+.dropMenuItem {
+    color: white !important;
+}
+
+.dropMenuItem:hover {
+    color: black !important;
+} 
+
+.dropdown-toggle::after {
+    display:none;
+}
+
+.btn:focus {
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+.container{
+    padding: 0px 25px;
+}
+
+
+/* ********************** Active header ********************** */
+
+.nav_active {
+    background-color: #ebfcfc;
+    position: sticky;
+    top:0%;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.brandName_active {
+    color: black !important;
+    font-family: 'Lobster', cursive;
+    font-size: xx-large;
+}
+
+.navItems_active {
+    color: black !important; 
+    height: 40px;
+    box-sizing: border-box;
+}
+
+.navItems_active:hover {
+    background-color: #0572f771 !important;
+    border-bottom: 5px solid black !important;
+    transition: 400ms !important;
+}

@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import "./CSS/Body.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Gallery from "./components/Gallery";
+import Feed from "./components/Feed";
+import AboutUs from "./components/AboutUs";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  render() {
+    return (
+      <>
+      <Header />
+        <Router>
+          
+          <Switch>
+            <Route exact path="/">
+              <p style={{ height: "1000px", color: "white" }}>hello</p>
+            </Route>
+            <Route path="/gallery">
+            <Gallery/>
+            </Route>
+            <Route path="/about_us">
+              <AboutUs/>
+            </Route>
+            <Route path="/feed">
+              <Feed/>
+            </Route>
+          </Switch>
+          <Footer />
+        </Router>
+      </>
+    );
+  }
 }
 
 export default App;
