@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Cherish&family=Lobster&display=swap");
+
+footer {
+  background-image: url("../img/FooterImg.jpg");
+  background-size: cover;
+  padding: 40px 40px 10px 40px;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.281);
+}
+
+.col {
+  text-align: center;
+}
+
+.icons {
+  margin-right: 5px;
+  font-size: 40px;
+  color: white;
+}
+
+.icons:hover {
+  cursor: pointer;
+  font-size: 45px;
+  color: rgb(95, 95, 255);
+}
+
+#colOneDiv {
+  padding: 50px ;
+}
+
+h3 {
+  color: white;
+  font-size: 50px;
+  font-family: "Lobster", cursive;
+}
+
+#copyRight {
+  text-align: center;
+  font-size: 30px;
+  color: white;
+  font-family: "Lobster", cursive;
+  margin-top: 20px;
+}
+
+#copyRightDiv {
+  border-top: 5px solid rgba(255, 255, 255, 0.603);
+  align-items: center;
+}
