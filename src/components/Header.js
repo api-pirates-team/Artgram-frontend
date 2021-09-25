@@ -66,7 +66,7 @@ class Header extends Component {
                   <BsList />
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu className="dropMenu">
+                <Dropdown.Menu className="dropMenu" right>
                   <Dropdown.Item href="/gallery" className="dropMenuItem">
                     Gallery
                   </Dropdown.Item>

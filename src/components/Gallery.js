@@ -13,7 +13,7 @@ class Gallery extends Component {
 
   componentDidMount = () => {
     axios
-      .get(`https://artgram-backend.herokuapp.com/art/allart`)
+      .get(`${process.env.REACT_APP_BACKEND_SERVER}/art/allart`)
       .then((res) => {
         this.setState({
           galleryData: res.data,
