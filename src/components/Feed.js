@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import Profile from './Profile';
 import { withAuth0 ,auth0} from '@auth0/auth0-react';
 
 
@@ -20,7 +21,7 @@ getdata = async() => {
       this.setState({
         userdata: res.data,
       });
-    });console.log(this.state.userdata);
+    });
 };
 
 
@@ -30,9 +31,11 @@ getdata = async() => {
     return (
       <div>
         {/* {this.getdata} */}
+        <img src={this.state.userdata.pp} alt={this.state.userdata.username} />
+        <h1>{this.state.userdata.username}</h1>
         <h1>{this.state.userdata.email}</h1>
-
-       
+        
+        {/* <Profile/> */}
         
       </div>
     )
