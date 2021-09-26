@@ -1,22 +1,42 @@
-import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+import React, { Component } from 'react'
+import axios from "axios";
+import { withAuth0 ,auth0} from '@auth0/auth0-react';
 
-const Feed = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
 
-  if (isLoading) {
-    return <div>Loading</div>;
+
+
+class Feed extends Component {
+constructor(props){
+  super(props);
+  this.state={
+   userdata:[]
   }
 
-  return (
-    isAuthenticated && (
-      <>
-        <img src={user.picture} alt={user.name} />
-        <h1>{user.name}</h1>
-        <h2>{user.email}</h2>
-      </>
-    )
-  );
+}
+getdata = async() => {
+  await axios
+    .get(`http://localhost:1177/getuser?email=momosamak21@gmail.com`)
+    .then((res) => {
+      this.setState({
+        userdata: res.data,
+      });
+    });console.log(this.state.userdata);
 };
 
-export default Feed;
+
+
+  render() {
+    this.getdata();
+    return (
+      <div>
+        {/* {this.getdata} */}
+        <h1>{this.state.userdata.email}</h1>
+
+       
+        
+      </div>
+    )
+  }
+}
+
+export default withAuth0(Feed)
