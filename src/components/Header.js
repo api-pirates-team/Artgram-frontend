@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "../CSS/Header.css";
 import { Navbar, Container, Nav, Dropdown } from "react-bootstrap";
 import { BsList } from "react-icons/bs";
+import { withAuth0 } from '@auth0/auth0-react';
+import LogoutButton from './LogoutButton';
+import LoginButton from './LoginButton';
 
 class Header extends Component {
   constructor(props) {
@@ -51,11 +54,11 @@ class Header extends Component {
                 className={
                   this.state.scrolling ? "navItems_active" : "navItems"
                 }
-              >
-                LogIn
+                 >
+                 {this.props.auth0.isAuthenticated ? <LogoutButton/> : <LoginButton/>}
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item>
+            {this.props.auth0.isAuthenticated && <Nav.Item>
               <Dropdown>
                 <Dropdown.Toggle
                   variant="none"
@@ -78,7 +81,7 @@ class Header extends Component {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-            </Nav.Item>
+            </Nav.Item>}
           </Nav>
         </Container>
       </Navbar>
@@ -86,4 +89,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withAuth0(Header);
