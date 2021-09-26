@@ -9,48 +9,75 @@ import Feed from "./components/Feed";
 import AboutUs from "./components/AboutUs";
 import { withAuth0 } from '@auth0/auth0-react';
 import Login from './components/Login';
-
+import axios from "axios";
 
 
 class App extends Component {
-  constructor(props){
-super(props)
-this.state={
-  likesData:[]
-}
-}
-handleLike=(likesData)=>{
-this.setState={
-likesData:likesData
-}
-
-}
-    
-  
+  constructor(props) {
+    super(props)
+    this.state = {
+      likedArtsData: []
+    }
+  }
+  updateUserData = (data) => {
+    // let configuser = {
+    //   method: "GET",
+    //   baseUrl: `https://artgram-backend.herokuapp.com`,
+    //   url: `/getuser?email=hassanhamdandev@gamil.com`
+    // }
+    // axios(configuser).then(response => {
+    //   this.setState({
+    //     idUser: response.data._id
+    //   })
+    // })
+    let config = {
+      method: "PUT",
+      baseURL: `https://artgram-backend.herokuapp.com/`,
+      url: `update-likes/6150e1478c5eca8bc44cf16b`,
+      data: data
+    }
+    axios(config).then(res => {
+      this.setState({
+        likedArtsData: res.data.likedArts
+      })
+      console.log(res.data.likedArts);
+    })
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.likedArtsData !== nextState.likedArtsData;
+  }
+  // handleLike = (likesData) => {
+  //   this.setState = {
+  //     likesData: likesData
+  //   }
+  //   console.log(this.state.likesData);
+  // }
   render() {
     return (
       <>
-      <Header />
+        <Header />
         <Router>
-          
           <Switch>
             <Route exact path="/">
-            
-            
-              <p style={{ height: "1000px", color: "white" }}>hello</p> 
+              <p style={{ height: "1000px", color: "white" }}>hello</p>
             </Route>
-           
             <Route exact path="/gallery">
-              <Gallery handleLike={this.handleLike}/> 
+              <Gallery
+                updateUserData={this.updateUserData}
+              // handleLike={this.handleLike}
+              />
             </Route>
             <Route path="/login">
-              <Login/>
+              <Login />
             </Route>
             <Route path="/about_us">
-              <AboutUs/>
+              <AboutUs />
             </Route>
             <Route path="/feed">
-              <Feed likesData={this.state.likesData}/>
+              <Feed
+                likedArtsData={this.state.likedArtsData}
+              // likesData={this.state.likesData} 
+              />
             </Route>
           </Switch>
           <Footer />
