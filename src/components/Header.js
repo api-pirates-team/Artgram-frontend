@@ -28,7 +28,7 @@ class Header extends Component {
  let config=  {
   method: "POST",
   // baseURL: ${process.env.REACT_APP_API_URL},
-  baseURL: 'http://localhost:1177',
+  baseURL: `${process.env.REACT_APP_BACKEND_SERVER}`,
   url: '/create_account',
   data: {
     username: username,

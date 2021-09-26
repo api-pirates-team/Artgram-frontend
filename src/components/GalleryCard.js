@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { Component } from "react";
 import { Card, Button } from "react-bootstrap";
 import GalleryModal from "./GalleryModal";
@@ -21,7 +22,21 @@ class GalleryCard extends Component {
       showModal: false,
     });
   };
+  updateUserData=(data)=>{
+    let config=  {
+      method: "PUT",
+      baseURL: `${process.env.REACT_APP_BACKEND_SERVER}`,
+      url: `/update-likes/614f54575eaf5c7e91a5b913`,
+      data:data
+      
+}
+console.log(data)
+axios(config).then(res=>{
+  this.props.handleLike(res.data.likedArts) ;
+  console.log(res.data)
+})
 
+  }
   render() {
     return (
       <>
@@ -29,7 +44,7 @@ class GalleryCard extends Component {
           <Card.Img variant="top" src={this.props.imageUrl} style={{height:"300px"}}/>
           <Card.Body>
             <Card.Title>{this.props.title}</Card.Title>
-            <Button variant="danger">like</Button>
+            <Button variant="danger" onClick={()=>{this.updateUserData(this.props.items)}}>like</Button>
             <Button variant="primary">Share</Button>
             <Button variant="warning" onClick={this.modalHandle}>
               More

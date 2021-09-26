@@ -34,6 +34,9 @@ class Gallery extends Component {
                   displaydate={item.displaydate}
                   artistName={item.artistName}
                   dimensions={item.dimensions}
+                  id={item._id}
+                  handleLike={this.props.handleLike}
+                  items={item}
                 />
               </Col>
             );

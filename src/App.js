@@ -13,6 +13,20 @@ import Login from './components/Login';
 
 
 class App extends Component {
+  constructor(props){
+super(props)
+this.state={
+  likesData:[]
+}
+}
+handleLike=(likesData)=>{
+this.setState={
+likesData:likesData
+}
+
+}
+    
+  
   render() {
     return (
       <>
@@ -27,7 +41,7 @@ class App extends Component {
             </Route>
            
             <Route exact path="/gallery">
-              <Gallery /> 
+              <Gallery handleLike={this.handleLike}/> 
             </Route>
             <Route path="/login">
               <Login/>
@@ -36,7 +50,7 @@ class App extends Component {
               <AboutUs/>
             </Route>
             <Route path="/feed">
-              <Feed/>
+              <Feed likesData={this.state.likesData}/>
             </Route>
           </Switch>
           <Footer />

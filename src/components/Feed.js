@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from "axios";
 import Profile from './Profile';
 import { withAuth0 ,auth0} from '@auth0/auth0-react';
+import { Card,Button } from 'react-bootstrap';
 
 
 
@@ -16,7 +17,7 @@ constructor(props){
 }
 getdata = async() => {
   await axios
-    .get(`http://localhost:1177/getuser?email=momosamak21@gmail.com`)
+    .get(`${process.env.REACT_APP_BACKEND_SERVER}/getuser?email=momosamak21@gmail.com`)
     .then((res) => {
       this.setState({
         userdata: res.data,
@@ -36,6 +37,23 @@ getdata = async() => {
         <h1>{this.state.userdata.email}</h1>
         
         {/* <Profile/> */}
+
+        {this.props.likesData.map(ele=>{
+return( 
+<Card style={{ width: "18rem", height:"450px" }}>
+<Card.Img variant="top" src={ele.imageUrl} style={{height:"300px"}}/>
+<Card.Body>
+  <Card.Title>{ele.title}</Card.Title>
+  <p>{ele.artistName}</p>
+  <p>{ele.displaydate}</p>
+  <p>{ele.dimensions}</p>
+  <Button variant="danger" >like</Button>
+  <Button variant="primary">Share</Button>
+  <Card.Text></Card.Text>
+</Card.Body>
+</Card>
+)
+        })}
         
       </div>
     )
