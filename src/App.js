@@ -7,6 +7,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Gallery from "./components/Gallery";
 import Feed from "./components/Feed";
 import AboutUs from "./components/AboutUs";
+import { withAuth0 } from '@auth0/auth0-react';
+import Login from './components/Login';
+
 
 
 class App extends Component {
@@ -18,10 +21,16 @@ class App extends Component {
           
           <Switch>
             <Route exact path="/">
-              <p style={{ height: "1000px", color: "white" }}>hello</p>
+            
+            
+              <p style={{ height: "1000px", color: "white" }}>hello</p> 
             </Route>
-            <Route path="/gallery">
-            <Gallery/>
+           
+            <Route exact path="/gallery">
+              <Gallery /> 
+            </Route>
+            <Route path="/login">
+              <Login/>
             </Route>
             <Route path="/about_us">
               <AboutUs/>
@@ -37,4 +46,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withAuth0(App);
