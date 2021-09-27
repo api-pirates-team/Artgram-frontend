@@ -7,45 +7,60 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Gallery from "./components/Gallery";
 import Feed from "./components/Feed";
 import AboutUs from "./components/AboutUs";
-import { withAuth0 } from "@auth0/auth0-react";
+import Login from './components/Login';
 import axios from "axios";
 import HomePage from "./components/HomePage";
+import { withAuth0 } from '@auth0/auth0-react';
+
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       likedArtsData: [],
-    };
+
+      currentUser: {
+        username: '',
+        email: '',
+        pp: '',
+        isArtists: false,
+      },
+      currentUserDB: {},
+      authFinishedFlag: false,
+    }
   }
 
-  updateUserData = (data) => {
-    // let configuser = {
-    //   method: "GET",
-    //   baseUrl: `https://artgram-backend.herokuapp.com`,
-    //   url: `/getuser?email=hassanhamdandev@gamil.com`
-    // }
-    // axios(configuser).then(response => {
-    //   this.setState({
-    //     idUser: response.data._id
-    //   })
-    // })
+  componentDidMount = () => {
+    setTimeout(async () => {
+      await this.props.auth0.isAuthenticated && this.setState({
+        currentUser: {
+          username: this.props.auth0.user.name,
+          email: this.props.auth0.user.email,
+          pp: this.props.auth0.user.picture,
+        },
+        authFinishedFlag: true,
+      });
+      console.log(this.state.currentUser);
+    }, 5000);
+  };
+
+  updateUserData = async (data) => {
+    axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/getuser?email=${this.state.currentUser.email}`).then(response => {
+      this.setState({
+        currentUserDB: response.data
+      });
+    });
     let config = {
       method: "PUT",
       baseURL: `${process.env.REACT_APP_BACKEND_SERVER}`,
-      url: `/update-likes/6150e1478c5eca8bc44cf16b`,
-      data: data,
+      url: `/update-likes/${this.state.currentUserDB._id}`,
+      data: data
     };
-    axios(config).then((res) => {
+    axios(config).then(res => {
       this.setState({
-        likedArtsData: res.data.likedArts,
-      });
-      // console.log(res.data.likedArts);
-    });
-  };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.likedArtsData !== nextState.likedArtsData;
+        likedArtsData: res.data.likedArts
+      })
+    })
   }
 
   render() {
@@ -57,22 +72,20 @@ class App extends Component {
             <Route exact path="/">
               <HomePage />
               <p style={{ height: "1000px", color: "white" }}>hello</p>
-
             </Route>
             <Route exact path="/gallery">
-              <Gallery updateUserData={this.updateUserData} />
+              <Gallery
+                updateUserData={this.updateUserData} currentUserDB={this.state.currentUserDB}
+              />
             </Route>
-            {/* <Route path="/login">
-              { <Login />}
-            </Route> */}
+            <Route path="/login">
+              <Login />
+            </Route>
             <Route path="/about_us">
               <AboutUs />
             </Route>
             <Route path="/feed">
-              <Feed
-                likedArtsData={this.state.likedArtsData}
-              // likesData={this.state.likesData}
-              />
+               <Feed updateUserData={this.updateUserData}/>
             </Route>
           </Switch>
           <Footer />

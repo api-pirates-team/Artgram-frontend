@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;500;800&family=Playfair+Display:ital,wght@1,400;1,500;1,600&family=Slabo+27px&display=swap');
+
+
+/* ********************* Row ************************** */
+#aboutUSRow {
+  width: 100%;
+  margin: 30px auto;
+}
+
+/* ********************* Card ************************** */
+
+.aboutUsCard {
+  width: 16rem;
+  margin: auto;
+  background:none;
+  border: none;
+  box-shadow: none;
+}
+
+/* ********************* Card Image ************************** */
+
+.cardImg {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  margin: auto;
+  filter: grayscale(1);
+}
+
+.cardImg:hover{
+  filter: grayscale(0);
+  transition-duration: 0.2s;
+  height: 220px;
+  width: 220px;
+}
+
+/* ********************* 1ST & 2ND div ************************** */
+
+#firstDiv{
+  height: 700px;
+  padding: 200px 200px ;
+}
+
+#firstDiv h1{
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-size: 75px;
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+}
+
+#firstDiv p {
+  text-align: center;
+  color: white;
+  font-size: 50px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+}
+
+#secondDiv{
+  height: 200px;
+  padding: 75px;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+/* ********************* Container ************************** */
+
+#containerDiv{
+  background-color: #4e788aaf;
+  padding: 20px;
+  margin-bottom: 100px;
+}
+
+#containerDiv h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  text-align: center;
+  font-size: 50px;
+  margin-top: 50px;
+  padding-top: 10px;
+  border-top: 2px solid rgba(255, 255, 255, 0.521);
+  color: white;
+}
+
+/* ********************* Card body************************** */
+
+.title{
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: white;
+}
+
+.title p {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.gitHub{
+  font-size: 40px;
+}
+
+.gitHub:hover {
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.aboutUsCardText{
+  color: white;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
