@@ -9,6 +9,7 @@ import Feed from "./components/Feed";
 import AboutUs from "./components/AboutUs";
 import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
+import HomePage from "./components/HomePage";
 
 class App extends Component {
   constructor(props) {
@@ -54,7 +55,9 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/">
+              <HomePage />
               <p style={{ height: "1000px", color: "white" }}>hello</p>
+
             </Route>
             <Route exact path="/gallery">
               <Gallery updateUserData={this.updateUserData} />
@@ -68,7 +71,7 @@ class App extends Component {
             <Route path="/feed">
               <Feed
                 likedArtsData={this.state.likedArtsData}
-                // likesData={this.state.likesData}
+              // likesData={this.state.likesData}
               />
             </Route>
           </Switch>
