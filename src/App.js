@@ -7,9 +7,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Gallery from "./components/Gallery";
 import Feed from "./components/Feed";
 import AboutUs from "./components/AboutUs";
-
 import Login from './components/Login';
 import axios from "axios";
+import HomePage from "./components/HomePage";
 import { withAuth0 } from '@auth0/auth0-react';
 
 
@@ -70,30 +70,22 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/">
+              <HomePage />
               <p style={{ height: "1000px", color: "white" }}>hello</p>
             </Route>
             <Route exact path="/gallery">
-
               <Gallery
                 updateUserData={this.updateUserData} currentUserDB={this.state.currentUserDB}
               />
             </Route>
             <Route path="/login">
               <Login />
-
-
-
             </Route>
-            {/* <Route path="/login">
-              { <Login />}
-            </Route> */}
             <Route path="/about_us">
               <AboutUs />
             </Route>
             <Route path="/feed">
-
                <Feed updateUserData={this.updateUserData}/>
-
             </Route>
           </Switch>
           <Footer />
