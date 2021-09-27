@@ -13,7 +13,7 @@ class Header extends Component {
     this.state = {
       scrolling: false,
     };
-  };
+  }
 
   changeBackroung = () => {
     window.scrollY > 0
@@ -44,7 +44,7 @@ class Header extends Component {
   componentDidMount = () => {
     window.addEventListener("scroll", this.changeBackroung);
   };
-  
+
   render() {
     return (
       <Navbar className={this.state.scrolling ? "nav_active" : "nav"}>
@@ -77,7 +77,7 @@ class Header extends Component {
                 ) : (
                   <LoginButton />
                 )}
-                {this.props.auth0.isAuthenticated &&
+                {this.props.auth0.isAuthenticated && 
                   this.createUser(
                     this.props.auth0.user.name,
                     this.props.auth0.user.email,
