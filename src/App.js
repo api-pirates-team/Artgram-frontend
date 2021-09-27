@@ -7,18 +7,17 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Gallery from "./components/Gallery";
 import Feed from "./components/Feed";
 import AboutUs from "./components/AboutUs";
-import { withAuth0 } from '@auth0/auth0-react';
-import Login from './components/Login';
+import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      likedArtsData: []
-    }
+      likedArtsData: [],
+    };
   }
+
   updateUserData = (data) => {
     // let configuser = {
     //   method: "GET",
@@ -32,26 +31,22 @@ class App extends Component {
     // })
     let config = {
       method: "PUT",
-      baseURL: `https://artgram-backend.herokuapp.com/`,
-      url: `update-likes/6150e1478c5eca8bc44cf16b`,
-      data: data
-    }
-    axios(config).then(res => {
+      baseURL: `${process.env.REACT_APP_BACKEND_SERVER}`,
+      url: `/update-likes/6150e1478c5eca8bc44cf16b`,
+      data: data,
+    };
+    axios(config).then((res) => {
       this.setState({
-        likedArtsData: res.data.likedArts
-      })
-      console.log(res.data.likedArts);
-    })
-  }
+        likedArtsData: res.data.likedArts,
+      });
+      // console.log(res.data.likedArts);
+    });
+  };
+
   shouldComponentUpdate(nextProps, nextState) {
     return this.state.likedArtsData !== nextState.likedArtsData;
   }
-  // handleLike = (likesData) => {
-  //   this.setState = {
-  //     likesData: likesData
-  //   }
-  //   console.log(this.state.likesData);
-  // }
+
   render() {
     return (
       <>
@@ -62,21 +57,18 @@ class App extends Component {
               <p style={{ height: "1000px", color: "white" }}>hello</p>
             </Route>
             <Route exact path="/gallery">
-              <Gallery
-                updateUserData={this.updateUserData}
-              // handleLike={this.handleLike}
-              />
+              <Gallery updateUserData={this.updateUserData} />
             </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
+            {/* <Route path="/login">
+              { <Login />}
+            </Route> */}
             <Route path="/about_us">
               <AboutUs />
             </Route>
             <Route path="/feed">
               <Feed
                 likedArtsData={this.state.likedArtsData}
-              // likesData={this.state.likesData} 
+                // likesData={this.state.likesData}
               />
             </Route>
           </Switch>

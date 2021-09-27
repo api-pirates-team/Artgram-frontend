@@ -3,14 +3,14 @@ import axios from "axios";
 import GalleryCard from "../components/GalleryCard";
 import { Row, Col, Container } from "react-bootstrap";
 
-
 class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
       galleryData: [],
     };
-  }
+  };
+  
   componentDidMount = () => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_SERVER}/art/allart`)
@@ -20,6 +20,7 @@ class Gallery extends Component {
         });
       });
   };
+  
   render() {
     return (
       <Container fluid="md" style={{ margin: "100px auto" }}>
@@ -35,7 +36,6 @@ class Gallery extends Component {
                   dimensions={item.dimensions}
                   id={item._id}
                   updateUserData={this.props.updateUserData}
-                  // handleLike={this.props.handleLike}
                   items={item}
                 />
               </Col>
