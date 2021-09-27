@@ -16,7 +16,10 @@ class GalleryModal extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Image style={{ width: "100%", height: "100%" }} src={this.props.imageUrl} />
+          <Image
+            style={{ width: "100%", height: "100%" }}
+            src={this.props.imageUrl}
+          />
           <p>{this.props.displaydate}</p>
           <p>{this.props.artistName}</p>
           <p>{this.props.dimensions}</p>

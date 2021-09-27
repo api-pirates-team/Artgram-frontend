@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import axios from "axios";
 import { withAuth0 } from '@auth0/auth0-react';
 import { Card, Container, Row, Col, Image, Offcanvas, Button } from 'react-bootstrap';
 import '../CSS/Feed.css';
 import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 import { BsX } from "react-icons/bs";
+
 
 class Feed extends Component {
   constructor(props) {
@@ -34,13 +35,16 @@ class Feed extends Component {
         },
       });
       axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/getuser?email=${this.state.currentUser.email}`).then(response => {
+
         this.setState({
           currentUserDB: response.data,
           likedArtsData: response.data.likedArts
         });
+
         console.log('hi');
       })
     }, 3000);
+
   };
 
   getImg = (element) => {
@@ -64,7 +68,6 @@ class Feed extends Component {
   }
 
   render() {
-
     return (
       <>
         <Container fluid="md">
@@ -106,15 +109,4 @@ class Feed extends Component {
     )
   }
 }
-{/* 
-                    <Card style={{ width: "18rem", height: "450px" }}>
-                      <Card.Img variant="top" src={elem.imageUrl} style={{ height: "300px" }} />
-                      <Card.Body>
-                        <Card.Title>{elem.title}</Card.Title>
-                        <p>{elem.artistName}</p>
-                        <p>{elem.displaydate}</p>
-                        <p>{elem.dimensions}</p>
-                        <Card.Text></Card.Text>
-                      </Card.Body>
-                    </Card> */}
 export default withAuth0(Feed)
