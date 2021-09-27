@@ -10,48 +10,54 @@ import AboutUs from "./components/AboutUs";
 import { withAuth0 } from '@auth0/auth0-react';
 import Login from './components/Login';
 import axios from "axios";
-
+import Delayed from './components/Delayed';
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      likedArtsData: []
+      likedArtsData: [],
+      currentUser: {
+        username: '',
+        email: '',
+        pp: '',
+        isArtists: false,
+      },
+      currentUserDB: {}
     }
   }
-  updateUserData = (data) => {
-    // let configuser = {
-    //   method: "GET",
-    //   baseUrl: `https://artgram-backend.herokuapp.com`,
-    //   url: `/getuser?email=hassanhamdandev@gamil.com`
-    // }
-    // axios(configuser).then(response => {
-    //   this.setState({
-    //     idUser: response.data._id
-    //   })
-    // })
+
+  componentDidMount = () => {
+    setTimeout(async () => {
+      await this.props.auth0.isAuthenticated && this.setState({
+        currentUser: {
+          username: this.props.auth0.user.name,
+          email: this.props.auth0.user.email,
+          pp: this.props.auth0.user.picture,
+        }
+      });
+      console.log(this.state.currentUser);
+    }, 5000);
+  };
+
+  updateUserData = async (data) => {
+    axios.get(`https://artgram-backend.herokuapp.com/getuser?email=${this.state.currentUser.email}`).then(response => {
+      this.setState({
+        currentUserDB: response.data
+      });
+    });
     let config = {
       method: "PUT",
       baseURL: `https://artgram-backend.herokuapp.com/`,
-      url: `update-likes/6150e1478c5eca8bc44cf16b`,
+      url: `update-likes/${this.state.currentUserDB._id}`,
       data: data
-    }
+    };
     axios(config).then(res => {
       this.setState({
         likedArtsData: res.data.likedArts
       })
-      console.log(res.data.likedArts);
     })
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.likedArtsData !== nextState.likedArtsData;
-  }
-  // handleLike = (likesData) => {
-  //   this.setState = {
-  //     likesData: likesData
-  //   }
-  //   console.log(this.state.likesData);
-  // }
   render() {
     return (
       <>
@@ -63,8 +69,7 @@ class App extends Component {
             </Route>
             <Route exact path="/gallery">
               <Gallery
-                updateUserData={this.updateUserData}
-              // handleLike={this.handleLike}
+                updateUserData={this.updateUserData} currentUserDB={this.state.currentUserDB}
               />
             </Route>
             <Route path="/login">
@@ -74,10 +79,9 @@ class App extends Component {
               <AboutUs />
             </Route>
             <Route path="/feed">
-              <Feed
-                likedArtsData={this.state.likedArtsData}
-              // likesData={this.state.likesData} 
-              />
+              <Delayed waitBeforeShow={8000}>
+                <Feed currentUserDB={this.state.currentUserDB} />
+              </Delayed>
             </Route>
           </Switch>
           <Footer />
