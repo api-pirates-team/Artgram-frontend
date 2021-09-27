@@ -7,10 +7,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Gallery from "./components/Gallery";
 import Feed from "./components/Feed";
 import AboutUs from "./components/AboutUs";
-import { withAuth0 } from '@auth0/auth0-react';
 import Login from './components/Login';
 import axios from "axios";
-import Delayed from './components/Delayed';
+import { withAuth0 } from '@auth0/auth0-react';
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +22,8 @@ class App extends Component {
         pp: '',
         isArtists: false,
       },
-      currentUserDB: {}
+      currentUserDB: {},
+      authFinishedFlag: false,
     }
   }
 
@@ -34,22 +34,23 @@ class App extends Component {
           username: this.props.auth0.user.name,
           email: this.props.auth0.user.email,
           pp: this.props.auth0.user.picture,
-        }
+        },
+        authFinishedFlag: true,
       });
       console.log(this.state.currentUser);
     }, 5000);
   };
 
   updateUserData = async (data) => {
-    axios.get(`https://artgram-backend.herokuapp.com/getuser?email=${this.state.currentUser.email}`).then(response => {
+    axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/getuser?email=${this.state.currentUser.email}`).then(response => {
       this.setState({
         currentUserDB: response.data
       });
     });
     let config = {
       method: "PUT",
-      baseURL: `https://artgram-backend.herokuapp.com/`,
-      url: `update-likes/${this.state.currentUserDB._id}`,
+      baseURL: `${process.env.REACT_APP_BACKEND_SERVER}`,
+      url: `/update-likes/${this.state.currentUserDB._id}`,
       data: data
     };
     axios(config).then(res => {
@@ -79,9 +80,7 @@ class App extends Component {
               <AboutUs />
             </Route>
             <Route path="/feed">
-              <Delayed waitBeforeShow={8000}>
-                <Feed currentUserDB={this.state.currentUserDB} />
-              </Delayed>
+               <Feed updateUserData={this.updateUserData}/>
             </Route>
           </Switch>
           <Footer />
