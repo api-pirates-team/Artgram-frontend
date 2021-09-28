@@ -37,7 +37,7 @@ class Header extends Component {
       },
     };
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
     });
   };
 

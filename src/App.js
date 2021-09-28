@@ -69,8 +69,13 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/">
+              <div className="homePageDiv">
+                <h1>Create Your Collection Of Arts</h1>
+                <p>Sign up to start collect your favorite arts, and push your works to the wrold</p>
+                <br/>
+                <h2>" The aim of art is not to represent the outward appearance of things, but their inward significance "</h2>
+              </div>
               <HomePage updateUserData={this.updateUserData}/>
-              <p style={{ height: "1000px", color: "white" }}>hello</p>
             </Route>
             <Route exact path="/gallery">
               <Gallery

@@ -45,7 +45,7 @@ class Feed extends Component {
           likedArtsData: response.data.likedArts
         });
 
-        console.log('hi');
+        // console.log('hi');
       })
     }, 3000);
 
