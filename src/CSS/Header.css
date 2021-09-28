@@ -18,16 +18,26 @@
 }
 
 .navItems {
-    color: blanchedalmond !important; 
-    height: 40px;
+    width: auto;
+    color: white !important; 
+    height: 45px;
     box-sizing: border-box;
+    border: none;
+    box-shadow: inset 0 0 0 0 #0073ff;
+    transition: ease-out 0.3s;
+    outline: none;
+    margin-right: 5px;
+    border-radius: 10px;
 }
 
 
 
 .navItems:hover {
-    background-color: rgba(255, 255, 255, 0.404) !important;
-    border-bottom: 5px solid black !important;
+    box-shadow: inset  100px 0 0 0 #0073ff91;
+    cursor: pointer;
+    border-radius: 10px;
+    /* background-color: rgba(255, 255, 255, 0.404) !important;
+    border-bottom: 5px solid black !important; */
 }
 
 /* ********************** dropdown menu *************************** */
@@ -35,6 +45,10 @@
 .dropMenu{
     background-color:#00494a7c !important;
     
+}
+
+.dropMenu_active{
+    background-color:rgba(0, 0, 0, 0.616) !important;
 }
 
 .dropMenuItem {
@@ -64,7 +78,7 @@
 /* ********************** Active header ********************** */
 
 .nav_active {
-    background-color: #ebfcfc;
+    background-color: white;
     position: sticky;
     top:0%;
     box-sizing: border-box;
@@ -78,13 +92,21 @@
 }
 
 .navItems_active {
+    width: auto;
     color: black !important; 
     height: 40px;
     box-sizing: border-box;
+    box-shadow: inset 0 0 0 0 #000000;
+    transition: ease-out 0.3s;
+    outline: none;
+    margin-right: 5px;
+    border: none !important;
+    border-radius: 10px;
 }
 
 .navItems_active:hover {
-    background-color: #0572f771 !important;
-    border-bottom: 5px solid black !important;
-    transition: 400ms !important;
+    box-shadow: inset  100px 0 0 0 #000000;
+    cursor: pointer;
+    color: white !important;
+    border-radius: 10px;
 }
