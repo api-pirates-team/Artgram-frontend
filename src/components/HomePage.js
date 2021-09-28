@@ -13,8 +13,8 @@ class HomePage extends Component {
     render() {
         return (
             <>
-                <ArtistWork />
                 <ArtistGallery updateUserData={this.props.updateUserData} />
+                <ArtistWork />
             </>
         )
     }
