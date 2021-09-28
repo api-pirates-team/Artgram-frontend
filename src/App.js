@@ -69,7 +69,7 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/">
-              <HomePage />
+              <HomePage updateUserData={this.updateUserData}/>
               <p style={{ height: "1000px", color: "white" }}>hello</p>
             </Route>
             <Route exact path="/gallery">
