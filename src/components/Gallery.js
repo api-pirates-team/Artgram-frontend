@@ -11,7 +11,7 @@ class Gallery extends Component {
       galleryData: [],
     };
   };
-  
+
   componentDidMount = () => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_SERVER}/art/allart`)
@@ -21,12 +21,17 @@ class Gallery extends Component {
         });
       });
   };
-  
+
   render() {
     return (
-      <Container fluid="md" style={{ margin: "50px auto" }}>
-        <h1 > Our Artest Gallery </h1>
-        <Row xs={1} md={4} className="g-3">
+      <>
+        <div className='homePageDiv'>
+          <h1 >Museums Gallery</h1>
+          <p className="descriptionP">In this gallery, you can find artwork coming from three different well-known museums: Harvard Art Museums, Art Institute of Chicago, and Rijksstudio</p>
+        </div>
+        
+        <Container className='mainGalleryContainer' fluid="md">
+        <Row xs={1} md={3} className="g-3">
           {this.state.galleryData.map((item) => {
             return (
               <Col>
@@ -46,6 +51,7 @@ class Gallery extends Component {
           })}
         </Row>
       </Container>
+      </>
     );
   }
 }
