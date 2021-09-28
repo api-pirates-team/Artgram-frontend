@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Card, Button } from "react-bootstrap";
 import GalleryModal from "./GalleryModal";
 import { withAuth0 } from "@auth0/auth0-react";
-import ButtonLikes from './Button';
+import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 
 class GalleryCard extends Component {
   constructor(props) {
@@ -11,12 +11,14 @@ class GalleryCard extends Component {
       idUser: "",
       showModal: false,
       count:0,
+      likeClicked: false,
     };
   };
 
   incrementCount= () => {
     this.setState({
-      count:this.state.count+1
+      count:this.state.count+1,
+      likeClicked: true
     })
   }
   modalHandle = () => {
@@ -31,14 +33,10 @@ class GalleryCard extends Component {
     });
   };
 
- 
-  
-
-  render() {
-    console.log(this.state.count );
-    
+  render() {  
     return (
       <>
+      {/* <button type="button" onclick="this.disabled = 'disabled';">Click Me!</button> */}
         <Card style={{ width: "18rem", height: "450px" }}>
           <Card.Img
             variant="top"
@@ -47,18 +45,14 @@ class GalleryCard extends Component {
           />
           <Card.Body>
             <Card.Title>{this.props.title}</Card.Title>
-            <Button
-              variant="danger"
+            {this.state.likeClicked ? <FcLike size='30px'></FcLike> : <FcLikePlaceholder size='30px'
               onClick= 
               {() => {
                 this.props.updateUserData(this.props.items);
-
+                console.log(this.props.updateUserData);
                 this.incrementCount()
-                
-              }}
-            >{this.state.count} <br/>
-              like
-            </Button>
+                }}></FcLikePlaceholder>}
+            
             <Button variant="primary">Share</Button>
             <Button variant="warning" onClick={this.modalHandle}>
               More
@@ -81,3 +75,4 @@ class GalleryCard extends Component {
 }
 
 export default withAuth0(GalleryCard);
+
