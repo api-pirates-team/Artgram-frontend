@@ -1,35 +1,48 @@
 import React, { Component } from 'react';
 import { withAuth0 } from "@auth0/auth0-react";
-import { Col, Button, Card, ListGroup, ListGroupItem, } from 'react-bootstrap';
+import { Col, Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { BsX } from "react-icons/bs";
+import { AiTwotoneEdit, AiTwotoneDelete } from "react-icons/ai";
 
 class OneWork extends Component {
+    constructor(props) {
+        super(props);
+        this.state = ({
+            model: false
+        });
+    }
+
     render() {
         const { user } = this.props.auth0;
         return (
             <>
                 <Col>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={this.props.workImage} style={{height:"300px"}}/>
-                        <Card.Body>
-                            <Card.Title>{this.props.workTitle}</Card.Title>
-                        </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroupItem>{this.props.artistName}</ListGroupItem>
-                            <ListGroupItem>
-                                <Button
-                                    onClick={() => this.props.handleDeleteWork(this.props.workId)} variant="danger"
-                                >
-                                    Delete
-                                </Button>
-                                <Button
-                                    onClick={() => this.props.handleUpdate(this.props.workId, user.name, user.picture, this.props.workTitle, this.props.artistContactInfo, this.props.artistLocation, this.props.workDate, this.props.workDimensions, this.props.workImage)} variant="info"
-                                >
-                                    Update
-                                </Button>
-                            </ListGroupItem>
-                        </ListGroup>
+                    <Card className='myCard' style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={this.props.workImage} style={{ "height": "400px", "object-fit": "cover", }} onClick={() => this.setState({ model: true })} />
                     </Card>
                 </Col>
+                <div className={this.state.model ? 'model open' : 'model'}>
+                    <BsX className='closingIcon' onClick={() => this.setState({ model: false })} />
+                    <div className='insideModel'>
+                        <h3>{this.props.workTitle}</h3>
+                        <AiTwotoneDelete className='insideDSVG' size={25} onClick={() => this.props.handleDeleteWork(this.props.workId)} variant="danger">
+                            Delete
+                        </AiTwotoneDelete>
+                        <AiTwotoneEdit className='insideESVG' size={25}
+                            onClick={() => this.props.handleUpdate(this.props.workId, user.name, user.picture, this.props.workTitle, this.props.artistContactInfo, this.props.artistLocation, this.props.workDate, this.props.workDimensions, this.props.workImage)}>
+                        </AiTwotoneEdit>
+                        <section className='sectionForEdit'>
+                        <img className='artistImage' src={this.props.workImage} alt='hi' />
+                        <div className='imageData'>
+                            <p>By: {this.props.artistName}, {this.props.artistLocation}</p>
+                            <p>Artist Contact Info: {this.props.artistContactInfo}</p>
+                            <p>Painting Dimensions: {this.props.workDimensions}</p>
+                            <small>Uploaded On {this.props.workDate}</small>
+                        </div>
+                        </section>
+                        
+                    </div>
+                </div>
             </>
         )
     }

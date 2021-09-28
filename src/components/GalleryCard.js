@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Card, Button } from "react-bootstrap";
 import GalleryModal from "./GalleryModal";
 import { withAuth0 } from "@auth0/auth0-react";
+import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 // import ButtonLikes from './Button';
 import '../CSS/CardStyle.css'
 import swal from 'sweetalert';
-import { FcLike } from "react-icons/fc";
+// import { FcLike } from "react-icons/fc";
 import { FcShare } from "react-icons/fc";
 import { CgMoreO } from "react-icons/cg";
 
@@ -17,6 +18,7 @@ class GalleryCard extends Component {
       idUser: "",
       showModal: false,
       count:0,
+      likeClicked: false,
       show: false,
 
     };
@@ -33,7 +35,8 @@ class GalleryCard extends Component {
   };
   incrementCount= () => {
     this.setState({
-      count:this.state.count+1
+      count:this.state.count+1,
+      likeClicked: true
     })
   }
   modalHandle = () => {
@@ -48,12 +51,7 @@ class GalleryCard extends Component {
     });
   };
 
- 
-  
-
-  render() {
-    console.log(this.state.count );
-    
+  render() {  
     return (
       <>
         <Card class="Maincard" style={{ width: "18rem", height: "450px" }}>
@@ -70,7 +68,7 @@ class GalleryCard extends Component {
               onClick= 
               {() => {
                 this.props.updateUserData(this.props.items);
-
+                console.log(this.props.updateUserData);
                 this.incrementCount()
                 swal("Success!", "You added this art to your like list!", "success");
                 
@@ -100,3 +98,4 @@ class GalleryCard extends Component {
 }
 
 export default withAuth0(GalleryCard);
+

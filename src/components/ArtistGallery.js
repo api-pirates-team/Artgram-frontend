@@ -37,9 +37,9 @@ class ArtistGallery extends Component {
       <>
         
           <Container style={{ width:"80%", marginBottom:"100px"}}>
-              <h2 id="h2">Sample Of Our Museums Gallery</h2>
+              <h2 id="h2">Museums Gallery Collection</h2>
             <Carousel fade style={{ zIndex:"0"}}>
-              {this.state.galleryHome.slice(-8).map((item) => {
+              {this.state.galleryHome.slice(-15, 105).map((item) => {
                 return (
                   <Carousel.Item>
                     <img
