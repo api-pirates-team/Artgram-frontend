@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Card, Button } from "react-bootstrap";
 import GalleryModal from "./GalleryModal";
 import { withAuth0 } from "@auth0/auth0-react";
+import ButtonLikes from './Button';
 
 class GalleryCard extends Component {
   constructor(props) {
@@ -9,9 +10,15 @@ class GalleryCard extends Component {
     this.state = {
       idUser: "",
       showModal: false,
+      count:0,
     };
   };
 
+  incrementCount= () => {
+    this.setState({
+      count:this.state.count+1
+    })
+  }
   modalHandle = () => {
     this.setState({
       showModal: true,
@@ -24,7 +31,12 @@ class GalleryCard extends Component {
     });
   };
 
+ 
+  
+
   render() {
+    console.log(this.state.count );
+    
     return (
       <>
         <Card style={{ width: "18rem", height: "450px" }}>
@@ -37,10 +49,14 @@ class GalleryCard extends Component {
             <Card.Title>{this.props.title}</Card.Title>
             <Button
               variant="danger"
-              onClick={() => {
+              onClick= 
+              {() => {
                 this.props.updateUserData(this.props.items);
+
+                this.incrementCount()
+                
               }}
-            >
+            >{this.state.count} <br/>
               like
             </Button>
             <Button variant="primary">Share</Button>
