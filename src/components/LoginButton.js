@@ -10,7 +10,7 @@ const LoginButton = () => {
 
   if(window.scrollY > 0 && !scrolling) {
     setScrolling(true);
-    console.log('working')
+    // console.log('working')
   }else if (window.scrollY === 0 && scrolling) {
      setScrolling(false);
      
