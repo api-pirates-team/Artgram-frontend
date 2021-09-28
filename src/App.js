@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -10,6 +11,8 @@ import AboutUs from "./components/AboutUs";
 import axios from "axios";
 import HomePage from "./components/HomePage";
 import { withAuth0 } from '@auth0/auth0-react';
+import RingLoader from "react-spinners/RingLoader";
+import SyncLoader from "react-spinners/SyncLoader";
 
 
 class App extends Component {
@@ -26,6 +29,7 @@ class App extends Component {
       },
       currentUserDB: {},
       authFinishedFlag: false,
+      lodaing: true,
     }
   }
 
@@ -41,7 +45,18 @@ class App extends Component {
       });
       console.log(this.state.currentUser);
     }, 5000);
+   setTimeout(()=>{ this.setState({
+    lodaing: false
+  })},5000)
+     
+     
+  
+    
   };
+ 
+
+
+  
 
   updateUserData = async (data) => {
     axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/getuser?email=${this.state.currentUser.email}`).then(response => {
@@ -64,34 +79,38 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        <Header />
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <div className="homePageDiv">
-                <h1>Create Your Collection Of Arts</h1>
-                <p>Sign up to start collect your favorite arts, and push your works to the wrold</p>
-                <br/>
-                <h2>" The aim of art is not to represent the outward appearance of things, but their inward significance "</h2>
-              </div>
-              <HomePage updateUserData={this.updateUserData}/>
-            </Route>
-            <Route exact path="/gallery">
-              <Gallery
-                updateUserData={this.updateUserData} currentUserDB={this.state.currentUserDB}
-              />
-            </Route>
-            <Route path="/about_us">
-              <AboutUs />
-            </Route>
-            <Route path="/feed">
-               <Feed updateUserData={this.updateUserData}/>
-            </Route>
-          </Switch>
-          <Footer />
-        </Router>
-      </>
+<>     
+      {
+        this.state.lodaing ? <div className="loadingDiv"><h1 style={{color:"white"}}>Loading <SyncLoader color="white"/></h1><RingLoader size="250" color="white"/> </div> : <>  <Header />
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                <div className="homePageDiv">
+                  <h1>Create Your Collection Of Arts</h1>
+                  <p>Sign up to start collect your favorite arts, and push your works to the wrold</p>
+                  <br />
+                  <h2>" The aim of art is not to represent the outward appearance of things, but their inward significance "</h2>
+                </div>
+                <HomePage updateUserData={this.updateUserData} />
+              </Route>
+              <Route exact path="/gallery">
+                <Gallery
+                  updateUserData={this.updateUserData} currentUserDB={this.state.currentUserDB}
+                />
+              </Route>
+              <Route path="/about_us">
+                <AboutUs />
+              </Route>
+              <Route path="/feed">
+                <Feed updateUserData={this.updateUserData} />
+              </Route>
+            </Switch>
+            <Footer />
+          </Router> </>
+
+      }
+</>
+
     );
   }
 }
