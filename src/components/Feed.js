@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { withAuth0 } from '@auth0/auth0-react';
-import { Container, Row, Col, Image, Offcanvas, Button } from 'react-bootstrap';
+import { Card, Container, Row, Col, Image, Modal } from 'react-bootstrap';
 import '../CSS/Feed.css';
 import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 import { BsX } from "react-icons/bs";
+import { FcDislike, FcShare } from "react-icons/fc";
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, PinterestShareButton } from "react-share";
+import { FacebookIcon, TwitterIcon, WhatsappIcon, PinterestIcon } from "react-share";
 
 
 class Feed extends Component {
@@ -21,7 +24,8 @@ class Feed extends Component {
       currentUserDB: {},
       model: false,
       tempImgSrc: '',
-      fullElement: {}
+      fullElement: {},
+      show: false,
     }
   }
 
@@ -57,20 +61,31 @@ class Feed extends Component {
 
   unlikeImage = (imageID) => {
     axios.delete(`${process.env.REACT_APP_BACKEND_SERVER}/unlike/${this.state.currentUserDB._id}?imageID=${imageID}`)
-    .then(res => {
-      this.setState({
-        likedArtsData: res.data.likedArts
-      })
-    });
+      .then(res => {
+        this.setState({
+          likedArtsData: res.data.likedArts
+        })
+      });
     setTimeout(() => {
       window.location.reload();
-  }, 1000);
+    }, 1000);
   }
 
   randomNum = (min, max) => {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
+  }
+
+  handleClose = () => {
+    this.setState({
+      show: false,
+    })
+  }
+  handleShow = () => {
+    this.setState({
+      show: true,
+    })
   }
 
   render() {
@@ -83,8 +98,8 @@ class Feed extends Component {
               <h3>{this.state.currentUser.username}</h3>
               <br />
               <p>{this.state.likedArtsData.length} likes &nbsp;&nbsp;&nbsp;
-              {this.randomNum(0, 500)} followers &nbsp;&nbsp;&nbsp;
-              {this.randomNum(0, 1000)} following</p>
+                {this.randomNum(0, 500)} followers &nbsp;&nbsp;&nbsp;
+                {this.randomNum(0, 1000)} following</p>
             </Col>
           </Row>
         </Container>
@@ -93,20 +108,48 @@ class Feed extends Component {
           <Row>
             <Col><img src={this.state.tempImgSrc} alt='' /></Col>
             <Col className='imageData'>
-              <p>{this.state.fullElement.title}</p>
+              <h3>{this.state.fullElement.title}</h3>
               <p>Artist: {this.state.fullElement.artistName}</p>
               <p>Date year: {this.state.fullElement.displaydate}</p>
               <p>Dimensions: {this.state.fullElement.dimensions}</p>
+              <FcDislike size='23px' onClick={() => this.unlikeImage(this.state.fullElement._id)} />
             </Col>
           </Row>
-          <Button variant="danger" onClick={() => this.unlikeImage(this.state.fullElement._id)}>unlike</Button>
         </div>
         <div className='gallery'>
           {
             this.state.likedArtsData.map(elem => {
               return (
-                <div className='pics' onClick={() => this.getImg(elem)}>
-                  <img src={elem.imageUrl} style={{ width: '100%' }} alt='hi' />
+                <div className='picsDiv'>
+                  <div className='pics' onClick={() => this.getImg(elem)}>
+                    <img src={elem.imageUrl} style={{ width: '100%' }} alt='hi' />
+                  </div>
+                  <div className='svgButtons'>
+                    <FcDislike size='23px' onClick={() => this.unlikeImage(elem._id)} />
+                    &nbsp;&nbsp;
+                    <FcShare size='23px' onClick={this.handleShow} />
+
+                    <Modal centered show={this.state.show} onHide={this.handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title style={{ margin: 'auto' }}>Share Image to Social Media!</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body style={{ margin: 'auto' }}>
+                        <br />
+                        <FacebookShareButton url={elem.imageUrl} >
+                          <FacebookIcon size={30} round={true}></FacebookIcon>
+                        </FacebookShareButton> &nbsp;&nbsp;
+                        <TwitterShareButton url={elem.imageUrl} >
+                          <TwitterIcon size={30} round={true}></TwitterIcon>
+                        </TwitterShareButton> &nbsp;&nbsp;
+                        <WhatsappShareButton url={elem.imageUrl} >
+                          <WhatsappIcon size={30} round={true}></WhatsappIcon>
+                        </WhatsappShareButton> &nbsp;&nbsp;
+                        <PinterestShareButton url={elem.imageUrl} media={elem.imageUrl}>
+                          <PinterestIcon size={30} round={true}></PinterestIcon>
+                        </PinterestShareButton> &nbsp;&nbsp;<br /><br />
+                      </Modal.Body>
+                    </Modal>
+                  </div>
                 </div>
               )
             })
