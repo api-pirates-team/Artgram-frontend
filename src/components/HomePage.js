@@ -1,18 +1,23 @@
-import React, { Component } from 'react'
-import ArtistGallery from './ArtistGallery'
-import ArtistWork from './ArtistWork'
+import React, { Component } from 'react';
+import ArtistGallery from './ArtistGallery';
+import ArtistWork from './ArtistWork';
+import { withAuth0 } from '@auth0/auth0-react';
 
 class HomePage extends Component {
-
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+            test: "",
+        };
+    };
     render() {
         return (
             <>
                 <ArtistWork />
-                <ArtistGallery />
+                <ArtistGallery updateUserData={this.props.updateUserData} />
             </>
         )
     }
 }
 
-export default HomePage
+export default withAuth0(HomePage);
