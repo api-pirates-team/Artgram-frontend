@@ -99,6 +99,9 @@ class Header extends Component {
                     <Dropdown.Item href="/about_us" className="dropMenuItem">
                       About Us
                     </Dropdown.Item>
+                    <Dropdown.Item href="/page_not_found" className="dropMenuItem">
+                      Contact Us
+                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </Nav.Item>

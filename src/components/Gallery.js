@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import GalleryCard from "../components/GalleryCard";
 import { Row, Col, Container } from "react-bootstrap";
+import "../CSS/gallarymodal.css"
 
 class Gallery extends Component {
   constructor(props) {
@@ -23,7 +24,8 @@ class Gallery extends Component {
   
   render() {
     return (
-      <Container fluid="md" style={{ margin: "100px auto" }}>
+      <Container fluid="md" style={{ margin: "50px auto" }}>
+        <h1 > Our Artest Gallery </h1>
         <Row xs={1} md={4} className="g-3">
           {this.state.galleryData.map((item) => {
             return (

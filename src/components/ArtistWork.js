@@ -95,7 +95,7 @@ class ArtistWork extends Component {
         axios(config).then(response => {
             this.setState({
                 artWork: response.data
-            });
+            })
         });
         window.location.reload();
     }
@@ -267,7 +267,8 @@ class ArtistWork extends Component {
                     <Container className='artistsGallery'>
                         <Row className='worksContainer'>
                             <Col xs={11}><h3 className='worksContainerHeader'>Your Works</h3></Col>
-                            <Col xs={1}> <Button onClick={this.openCreateModal} variant="none" className="add"><span>Add</span></Button></Col>
+                            <Col xs={1}><Button onClick={this.openCreateModal} variant="none" className="add"><span>Add</span>
+                            </Button></Col>
                         </Row>
                         <Row xs={1} md={3} className="g-3">
                             {this.state.artWork.map((elem, index) => {

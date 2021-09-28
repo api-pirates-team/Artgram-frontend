@@ -39,3 +39,16 @@ body {
   font-size: 20px;
 }
 
+/* ************************** Loader ******************************* */
+
+.loadingDiv{
+width: 100vw;
+height: 100vh;
+background-color: #00494a;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+overflow-y: hidden;
+margin-bottom: -25px;
+}

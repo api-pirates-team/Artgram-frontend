@@ -109,6 +109,7 @@
 
 .myCard {
   border: 0px solid rgba(0,0,0,.125) !important;
+  margin: auto !important;
 }
 
 .myCardButtons {

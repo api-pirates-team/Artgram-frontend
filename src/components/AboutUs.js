@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row, Card, Button, Container } from "react-bootstrap";
+import { Col, Row, Card } from "react-bootstrap";
 import "../CSS/AboutUs.css";
 import wesam from "../img/wesam.jpg";
 import hasnaa from "../img/hasnaa.jfif";

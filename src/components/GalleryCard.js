@@ -3,6 +3,13 @@ import { Card, Button } from "react-bootstrap";
 import GalleryModal from "./GalleryModal";
 import { withAuth0 } from "@auth0/auth0-react";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
+// import ButtonLikes from './Button';
+import '../CSS/CardStyle.css'
+import swal from 'sweetalert';
+// import { FcLike } from "react-icons/fc";
+import { FcShare } from "react-icons/fc";
+import { CgMoreO } from "react-icons/cg";
+
 
 class GalleryCard extends Component {
   constructor(props) {
@@ -12,9 +19,20 @@ class GalleryCard extends Component {
       showModal: false,
       count:0,
       likeClicked: false,
+      show: false,
+
     };
   };
-
+  handleShow = () => {
+    this.setState({
+      show: true,
+    })
+  };
+  handleClose = () => {
+    this.setState({
+      show: false,
+    })
+  };
   incrementCount= () => {
     this.setState({
       count:this.state.count+1,
@@ -36,26 +54,31 @@ class GalleryCard extends Component {
   render() {  
     return (
       <>
-      {/* <button type="button" onclick="this.disabled = 'disabled';">Click Me!</button> */}
-        <Card style={{ width: "18rem", height: "450px" }}>
+        <Card class="Maincard" style={{ width: "18rem", height: "450px" }}>
           <Card.Img
+          class="Maincard"
             variant="top"
             src={this.props.imageUrl}
             style={{ height: "300px" }}
           />
-          <Card.Body>
-            <Card.Title>{this.props.title}</Card.Title>
-            {this.state.likeClicked ? <FcLike size='30px'></FcLike> : <FcLikePlaceholder size='30px'
+          <Card.Body class="Maincard">
+            <Card.Title class="Maincard">{this.props.title}</Card.Title>
+            <Button
+              variant="none"
               onClick= 
               {() => {
                 this.props.updateUserData(this.props.items);
                 console.log(this.props.updateUserData);
                 this.incrementCount()
-                }}></FcLikePlaceholder>}
-            
-            <Button variant="primary">Share</Button>
-            <Button variant="warning" onClick={this.modalHandle}>
-              More
+                swal("Success!", "You added this art to your like list!", "success");
+                
+              }}
+            > 
+              <FcLike style={{fontSize:"30px"}}/>
+            </Button>
+            <Button  variant="none"><FcShare style={{fontSize:"30px"}} /></Button>
+            <Button variant="none" onClick={this.modalHandle}>
+              <CgMoreO style={{fontSize:"30px"}}/>
             </Button>
             <Card.Text></Card.Text>
           </Card.Body>
