@@ -71,9 +71,9 @@ class App extends Component {
             <Route exact path="/">
               <div className="homePageDiv">
                 <h1>Create Your Collection Of Arts</h1>
-                <p>Sign up to start collect your favorite arts, and push your works to the wrold</p>
+                <p>Sign up to discover, collect, and share your favorite artwork!</p>
                 <br/>
-                <h2>" The aim of art is not to represent the outward appearance of things, but their inward significance "</h2>
+                <h2 className='artQuote'>" The aim of art is not to represent the outward appearance of things, but their inward significance "</h2>
               </div>
               <HomePage updateUserData={this.updateUserData}/>
             </Route>
