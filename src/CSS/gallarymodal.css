@@ -1,0 +1,23 @@
+.Modal{
+  
+  position: fixed; /* Stay in place */
+ 
+  background-color: rgba(16, 11, 63, 0.514); /* Black w/ opacity */
+  color: whitesmoke;
+  text-align: center;
+  font-family: "Lucida Console", "Courier New", monospace;
+
+}
+h1{color: whitesmoke;
+    text-align: center;
+    font-family: "Lucida Console", "Courier New", monospace;
+  
+}
+
+
+ 
+
+.ModalImg{
+      width: 750px!important;
+      height: 350px !important;
+}
