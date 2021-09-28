@@ -9,7 +9,7 @@ class OneWork extends Component {
             <>
                 <Col>
                     <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={this.props.workImage} />
+                        <Card.Img variant="top" src={this.props.workImage} style={{height:"300px"}}/>
                         <Card.Body>
                             <Card.Title>{this.props.workTitle}</Card.Title>
                         </Card.Body>

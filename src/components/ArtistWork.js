@@ -3,6 +3,7 @@ import axios from "axios";
 import { Col, Container, Row, Button, Modal, Form } from 'react-bootstrap';
 import { withAuth0 } from "@auth0/auth0-react";
 import OneWork from './OneWork';
+import "../CSS/ArtistGallery.css";
 
 class ArtistWork extends Component {
     constructor(props) {
@@ -263,10 +264,10 @@ class ArtistWork extends Component {
                         </Modal.Footer>
                     </Modal>
                     <br />
-                    <Container>
-                        <Row>
-                            <Col><h2>Our Artists Works</h2></Col>
-                            <Col> <Button onClick={this.openCreateModal} variant="success">+ Add</Button></Col>
+                    <Container style={{backgroundColor:"white", padding:"30px", marginBottom:"100px"}}>
+                        <Row style={{marginBottom:"30px"}}>
+                            <Col xs={11}><h3 style={{color:"black"}}>Your Works</h3></Col>
+                            <Col xs={1}> <Button onClick={this.openCreateModal} variant="none" className="add"><span>Add</span></Button></Col>
                         </Row>
                         <Row xs={1} md={4} className="g-3">
                             {this.state.artWork.map((elem, index) => {

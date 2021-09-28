@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { withAuth0 } from '@auth0/auth0-react';
-import { Card, Container, Row, Col, Image, Offcanvas, Button } from 'react-bootstrap';
+import { Container, Row, Col, Image, Offcanvas, Button } from 'react-bootstrap';
 import '../CSS/Feed.css';
 import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 import { BsX } from "react-icons/bs";
@@ -41,7 +41,7 @@ class Feed extends Component {
           likedArtsData: response.data.likedArts
         });
 
-        console.log('hi');
+        // console.log('hi');
       })
     }, 3000);
 
