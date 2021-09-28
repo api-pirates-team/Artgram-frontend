@@ -67,17 +67,24 @@ class Feed extends Component {
   }, 1000);
   }
 
+  randomNum = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
   render() {
     return (
-      <>
+      <div className={'main-feed-component'}>
         <Container fluid="md">
           <Row md={3} className="g-3">
             <Col xs={4}><Image src={this.state.currentUser.pp} roundedCircle /></Col>
-            <Col xs={6}>
-              {this.state.currentUser.username} <br />
-              {this.state.likedArtsData.length} likes {' '}
-              38 followers {' '}
-              92 following
+            <Col xs={12}>
+              <h3>{this.state.currentUser.username}</h3>
+              <br />
+              <p>{this.state.likedArtsData.length} likes &nbsp;&nbsp;&nbsp;
+              {this.randomNum(0, 500)} followers &nbsp;&nbsp;&nbsp;
+              {this.randomNum(0, 1000)} following</p>
             </Col>
           </Row>
         </Container>
@@ -86,7 +93,7 @@ class Feed extends Component {
           <Row>
             <Col><img src={this.state.tempImgSrc} alt='' /></Col>
             <Col className='imageData'>
-              <h2>{this.state.fullElement.title}</h2>
+              <p>{this.state.fullElement.title}</p>
               <p>Artist: {this.state.fullElement.artistName}</p>
               <p>Date year: {this.state.fullElement.displaydate}</p>
               <p>Dimensions: {this.state.fullElement.dimensions}</p>
@@ -105,7 +112,7 @@ class Feed extends Component {
             })
           }
         </div>
-      </>
+      </div>
     )
   }
 }
