@@ -37,6 +37,7 @@ class Gallery extends Component {
                   id={item._id}
                   updateUserData={this.props.updateUserData}
                   items={item}
+                  likesCounter={item.likesCounter}
                 />
               </Col>
             );
