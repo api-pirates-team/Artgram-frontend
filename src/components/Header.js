@@ -51,21 +51,11 @@ class Header extends Component {
         <Container className="container">
           <Navbar.Brand
             className={this.state.scrolling ? "brandName_active" : "brandName"}
-            href="#home"
+            href="/about_us"
           >
             ArtGram
           </Navbar.Brand>
           <Nav>
-            <Nav.Item>
-              <Nav.Link
-                href="/"
-                className={
-                  this.state.scrolling ? "navItems_active" : "navItems"
-                }
-              >
-                Home
-              </Nav.Link>
-            </Nav.Item>
             <Nav.Item>
               <Nav.Link
                 className={
@@ -94,9 +84,12 @@ class Header extends Component {
                       this.state.scrolling ? "navItems_active" : "navItems"
                     }
                   >
-                    <BsList />
+                    <BsList style={{fontSize: "25px"}}/>
                   </Dropdown.Toggle>
-                  <Dropdown.Menu className="dropMenu" right>
+                  <Dropdown.Menu className={ this.state.scrolling ? "dropMenu_active" : "dropMenu"}>
+                  <Dropdown.Item href="/" className="dropMenuItem">
+                      Home
+                    </Dropdown.Item>
                     <Dropdown.Item href="/gallery" className="dropMenuItem">
                       Gallery
                     </Dropdown.Item>
