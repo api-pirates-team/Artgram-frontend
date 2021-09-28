@@ -5,11 +5,10 @@ import { withAuth0 } from "@auth0/auth0-react";
 // import ButtonLikes from './Button';
 import '../CSS/CardStyle.css'
 import swal from 'sweetalert';
-import { FacebookIcon, TwitterIcon, WhatsappIcon, PinterestIcon } from "react-share";
+import { FcLike } from "react-icons/fc";
+import { FcShare } from "react-icons/fc";
+import { CgMoreO } from "react-icons/cg";
 
-import { FcLike } from "react-icons/fc"
-import { FcShare } from "react-icons/fc"
-import { CgMoreO } from "react-icons/cg"
 
 class GalleryCard extends Component {
   constructor(props) {

@@ -10,10 +10,10 @@ import Feed from "./components/Feed";
 import AboutUs from "./components/AboutUs";
 import axios from "axios";
 import HomePage from "./components/HomePage";
-import { withAuth0 } from '@auth0/auth0-react';
+import { withAuth0 } from "@auth0/auth0-react";
 import RingLoader from "react-spinners/RingLoader";
 import SyncLoader from "react-spinners/SyncLoader";
-
+import PageNotFound from "./components/PageNotFound";
 
 class App extends Component {
   constructor(props) {
@@ -22,95 +22,111 @@ class App extends Component {
       likedArtsData: [],
 
       currentUser: {
-        username: '',
-        email: '',
-        pp: '',
+        username: "",
+        email: "",
+        pp: "",
         isArtists: false,
       },
       currentUserDB: {},
       authFinishedFlag: false,
       lodaing: true,
-    }
+    };
   }
 
   componentDidMount = () => {
     setTimeout(async () => {
-      await this.props.auth0.isAuthenticated && this.setState({
-        currentUser: {
-          username: this.props.auth0.user.name,
-          email: this.props.auth0.user.email,
-          pp: this.props.auth0.user.picture,
-        },
-        authFinishedFlag: true,
-      });
+      (await this.props.auth0.isAuthenticated) &&
+        this.setState({
+          currentUser: {
+            username: this.props.auth0.user.name,
+            email: this.props.auth0.user.email,
+            pp: this.props.auth0.user.picture,
+          },
+          authFinishedFlag: true,
+        });
       console.log(this.state.currentUser);
     }, 5000);
-   setTimeout(()=>{ this.setState({
-    lodaing: false
-  })},5000)
-     
-     
-  
-    
+    setTimeout(() => {
+      this.setState({
+        lodaing: false,
+      });
+    }, 2500);
   };
- 
-
-
-  
 
   updateUserData = async (data) => {
-    axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/getuser?email=${this.state.currentUser.email}`).then(response => {
-      this.setState({
-        currentUserDB: response.data
+    axios
+      .get(
+        `${process.env.REACT_APP_BACKEND_SERVER}/getuser?email=${this.state.currentUser.email}`
+      )
+      .then((response) => {
+        this.setState({
+          currentUserDB: response.data,
+        });
       });
-    });
     let config = {
       method: "PUT",
       baseURL: `${process.env.REACT_APP_BACKEND_SERVER}`,
       url: `/update-likes/${this.state.currentUserDB._id}`,
-      data: data
+      data: data,
     };
-    axios(config).then(res => {
+    axios(config).then((res) => {
       this.setState({
-        likedArtsData: res.data.likedArts
-      })
-    })
-  }
+        likedArtsData: res.data.likedArts,
+      });
+    });
+  };
 
   render() {
     return (
-<>     
-      {
-        this.state.lodaing ? <div className="loadingDiv"><h1 style={{color:"white"}}>Loading <SyncLoader color="white"/></h1><RingLoader size="250" color="white"/> </div> : <>  <Header />
-          <Router>
-            <Switch>
-              <Route exact path="/">
-                <div className="homePageDiv">
-                  <h1>Create Your Collection Of Arts</h1>
-                  <p>Sign up to start collect your favorite arts, and push your works to the wrold</p>
-                  <br />
-                  <h2>" The aim of art is not to represent the outward appearance of things, but their inward significance "</h2>
-                </div>
-                <HomePage updateUserData={this.updateUserData} />
-              </Route>
-              <Route exact path="/gallery">
-                <Gallery
-                  updateUserData={this.updateUserData} currentUserDB={this.state.currentUserDB}
-                />
-              </Route>
-              <Route path="/about_us">
-                <AboutUs />
-              </Route>
-              <Route path="/feed">
-                <Feed updateUserData={this.updateUserData} />
-              </Route>
-            </Switch>
-            <Footer />
-          </Router> </>
-
-      }
-</>
-
+      <>
+        {this.state.lodaing ? (
+          <div className="loadingDiv">
+            <h1 style={{ color: "white", marginBottom: "50px" }}>
+              Loading <SyncLoader color="white" />
+            </h1>
+            <RingLoader size="250" color="white" />{" "}
+          </div>
+        ) : (
+          <>
+            <Header />
+            <Router>
+              <Switch>
+                <Route exact path="/">
+                  <div className="homePageDiv">
+                    <h1>Create Your Collection Of Arts</h1>
+                    <p>
+                      Sign up to start collect your favorite arts, and push your
+                      works to the wrold
+                    </p>
+                    <br />
+                    <h2>
+                      " The aim of art is not to represent the outward
+                      appearance of things, but their inward significance "
+                    </h2>
+                  </div>
+                  <HomePage updateUserData={this.updateUserData} />
+                </Route>
+                <Route exact path="/gallery">
+                  <Gallery
+                    updateUserData={this.updateUserData}
+                    currentUserDB={this.state.currentUserDB}
+                  />
+                </Route>
+                <Route path="/about_us">
+                  <AboutUs />
+                </Route>
+                <Route path="/feed">
+                  <Feed updateUserData={this.updateUserData} />
+                </Route>
+                <Route>
+                  <PageNotFound />
+                </Route>
+              </Switch>
+              <Footer />
+            </Router>
+          </>
+        )}
+      </>
     );
   }
 }
