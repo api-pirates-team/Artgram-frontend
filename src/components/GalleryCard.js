@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Card, Button, Row, Col } from "react-bootstrap";
-import { BsX } from "react-icons/bs";
+import { BsHeart, BsHeartFill, BsFullscreenExit, BsArrowsFullscreen } from "react-icons/bs";
 import { withAuth0 } from "@auth0/auth0-react";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import '../CSS/CardStyle.css'
 import swal from 'sweetalert';
-import { CgMoreAlt } from "react-icons/cg";
 
 class GalleryCard extends Component {
   constructor(props) {
@@ -35,7 +34,6 @@ class GalleryCard extends Component {
     this.setState({ likeClicked: true });
     axios.put(`${process.env.REACT_APP_BACKEND_SERVER}/liked-item/${this.props.id}`, { "like?": "yes" }).then(res => {
       this.setState({ count: res.data.newLikes + 1 });
-      console.log(this.state.count)
     })
   }
   modalHandle = () => {
@@ -64,17 +62,16 @@ class GalleryCard extends Component {
             <Card.Title class="Maincard" style={{ 'margin-top': '10px', 'font-weight': '600', 'font-size': '18px', }}>{this.props.title}</Card.Title>
             <small>{this.state.count} likes</small><br /><br />
             <div className="svgsHolder">
-              {this.state.likeClicked ? <Button variant="none"><FcLike style={{ fontSize: "25px" }} /></Button> : <Button
+              {this.state.likeClicked ? <Button variant="none"><BsHeartFill style={{ fontSize: "25px", color: 'tomato', position: 'absolute', bottom: '78px'  }} /></Button> : <Button
                 variant="none"
                 onClick=
                 {() => {
                   this.props.updateUserData(this.props.items);
-                  console.log(this.props.updateUserData);
                   this.incrementCount()
                   swal("Success!", "You've added this piece to your feed!", "success");
-                }}><FcLikePlaceholder style={{ fontSize: "25px" }} /></Button>}
+                }}><BsHeart style={{ fontSize: "25px", color: 'white', position: 'absolute', bottom: '78px' }} /></Button>}
               <Button variant="none" onClick={() => this.setState({ model: true })}>
-                <CgMoreAlt style={{ fontSize: "25px", color: "white" }} />
+                <BsArrowsFullscreen className='openImage' style={{ fontSize: "20px", color: "white" }} />
               </Button>
             </div>
             <Card.Text></Card.Text>
@@ -82,7 +79,7 @@ class GalleryCard extends Component {
         </Card>
 
         <div className={this.state.model ? 'model open' : 'model'}>
-          <BsX className='closingIcon' onClick={() => this.setState({ model: false })} />
+          <BsFullscreenExit className='closingIcon' onClick={() => this.setState({ model: false })} />
           <Row>
             <Col><img src={this.props.imageUrl} alt='' /></Col>
             <Col className='imageData'>

@@ -64,10 +64,12 @@
     transition: all 450ms ease;
     cursor: pointer;
     margin-bottom: 12px;
+    border-radius: 3px;
 }
 
 .gallery .pics:hover {
-    filter: opacity(0.8);
+    /* filter: sepia(0.8) */
+    filter: grayscale(0.6);
 }
 
 /* Images model */
@@ -105,12 +107,12 @@
 
 .closingIcon {
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     width: 2rem;
     height: 2rem;
     padding: 5px;
-    background-color: rgba(0,0,0,0.4);
+    /* background-color: rgba(0,0,0,0.4); */
     color:white;
     cursor: pointer;
 }
@@ -145,14 +147,23 @@ svg {
     margin-bottom: 25px;
 }
 
-.svgButtons {
+.profileData {
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    margin-top: 10px;
+    margin-left: 0px;
+}
+
+.outsideDelete {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    background: #202020f0;
-    height: 25px;
-    width: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    top: 5px;
+    right: 5px;
+}
+
+.shareImage {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }

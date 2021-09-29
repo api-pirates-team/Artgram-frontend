@@ -19,7 +19,6 @@ class App extends Component {
     super(props);
     this.state = {
       likedArtsData: [],
-
       currentUser: {
         username: "",
         email: "",
@@ -28,14 +27,14 @@ class App extends Component {
       },
       currentUserDB: {},
       authFinishedFlag: false,
-      lodaing: true,
+      gotUserFlag: false,
+      spinnerLoading: true
     };
   }
 
-  componentDidMount = () => {
-    setTimeout(async () => {
-      (await this.props.auth0.isAuthenticated) &&
-        this.setState({
+  componentDidMount = async () => {
+      setTimeout(async () => {
+        await this.props.auth0.isAuthenticated && this.setState({
           currentUser: {
             username: this.props.auth0.user.name,
             email: this.props.auth0.user.email,
@@ -43,16 +42,19 @@ class App extends Component {
           },
           authFinishedFlag: true,
         });
-      // console.log(this.state.currentUser);
-    }, 5000);
-    console.log(this.state.lodaing)
-    setTimeout(() => {
-      this.setState({
-        lodaing: false,
-      });
-    }, 2500);
-    console.log(this.state.lodaing)
-  };
+        if(this.state.authFinishedFlag) {
+          console.log('we have the user data Auth');
+          await axios.get( `${process.env.REACT_APP_BACKEND_SERVER}/getuser?email=${this.state.currentUser.email}`)
+          .then((response) => {
+          this.setState({
+            currentUserDB: response.data,
+            gotUserFlag: true,
+            spinnerLoading: false,
+          });
+          console.log('we have the user data from the DB')
+        });}
+      }, 4000)
+  }
 
   updateUserData = async (data) => {
     axios
@@ -64,40 +66,40 @@ class App extends Component {
           currentUserDB: response.data,
         });
       });
-    let config = {
-      method: "PUT",
-      baseURL: `${process.env.REACT_APP_BACKEND_SERVER}`,
-      url: `/update-likes/${this.state.currentUserDB._id}`,
-      data: data,
-    };
-    axios(config).then((res) => {
-      this.setState({
-        likedArtsData: res.data.likedArts,
+      let config = {
+        method: "PUT",
+        baseURL: `${process.env.REACT_APP_BACKEND_SERVER}`,
+        url: `/update-likes/${this.state.currentUserDB._id}`,
+        data: data,
+      };
+      axios(config).then((res) => {
+        this.setState({
+          likedArtsData: res.data.likedArts,
+        });
       });
-    });
-  };
+    }
+    
 
   render() {
     return (
       <>
-        {this.state.lodaing ? (
+        {this.state.spinnerLoading ? (
           <div className="loadingDiv">
             <h1 style={{ color: "white", marginBottom: "50px" }}>
-              Loading <SyncLoader color="white" />
+            Loading <SyncLoader color="white" />
             </h1>
             <RingLoader size="250" color="white" />{" "}
           </div>
         ) : (
           <>
-            <Header />
+            <Header gotUserFlag={this.props.gotUserFlag}/>
             <Router>
               <Switch>
                 <Route exact path="/">
                   <div className="homePageDiv">
                     <h1>Create Your Collection Of Arts</h1>
                     <p>
-                      Sign up to start collect your favorite arts, and push your
-                      works to the wrold
+                      Explore, like, collect, and share your favorite artwork!
                     </p>
                     <br />
                     <h2>
@@ -105,19 +107,23 @@ class App extends Component {
                       appearance of things, but their inward significance "
                     </h2>
                   </div>
-                  <HomePage updateUserData={this.updateUserData} />
+                  {this.state.gotUserFlag && <HomePage currentUserDB={this.state.currentUserDB} updateUserData={this.updateUserData} />}
                 </Route>
                 <Route exact path="/gallery">
+                {this.state.gotUserFlag &&
                   <Gallery
                     updateUserData={this.updateUserData}
                     currentUserDB={this.state.currentUserDB}
-                  />
+                    
+                  /> }
                 </Route>
                 <Route path="/about_us">
                   <AboutUs />
                 </Route>
                 <Route path="/feed">
-                  <Feed updateUserData={this.updateUserData} />
+                {this.state.gotUserFlag &&
+                  <Feed currentUserDB={this.state.currentUserDB} updateUserData={this.updateUserData} />
+                }
                 </Route>
                 <Route>
                   <PageNotFound />
