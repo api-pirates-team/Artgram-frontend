@@ -112,7 +112,7 @@ class App extends Component {
                       appearance of things, but their inward significance "
                     </h2>
                   </div>
-                  {this.state.gotUserFlag && <HomePage currentUserDB={this.state.currentUserDB} updateUserData={this.updateUserData} />}
+                  <HomePage currentUserDB={this.state.currentUserDB} updateUserData={this.updateUserData} gotUserFlag={this.state.gotUserFlag}/>
                 </Route>
                 <Route exact path="/gallery">
                 {this.state.gotUserFlag &&
