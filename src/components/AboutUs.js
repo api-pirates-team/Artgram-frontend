@@ -29,11 +29,10 @@ class AboutUs extends Component {
                 <Card.Img className="cardImg" variant="top" src={hasnaa} />
                 <Card.Body>
                   <Card.Title className="title">
-                    Hasnaa Al-Habahbeh <br /> <p>Full Stack Web Developer</p>
+                    Hasnaa Habahbeh <br /> <p>Full Stack Web Developer</p>
                   </Card.Title>
                   <Card.Text className="aboutUsCardText">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  Electrical Engineer Graduate from The University of Jordan, 2021.
                   </Card.Text>
                   <a href="https://github.com/hasnaa38" target="_blank">
                     <FaGithub className="gitHub" />{" "}
@@ -50,8 +49,7 @@ class AboutUs extends Component {
                     Hassan Hamdan <br /> <p>Full Stack Web Developer</p>{" "}
                   </Card.Title>
                   <Card.Text className="aboutUsCardText">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Geologist from Al-Yarmouk University. To be Professional Full Stack Developer
                   </Card.Text>
                   <a href="https://github.com/HassanHamdanDev" target="_blank">
                     <FaGithub className="gitHub" />{" "}
@@ -68,8 +66,7 @@ class AboutUs extends Component {
                     Mahmoud Hamdan <br /> <p>Full Stack Web Developer</p>
                   </Card.Title>
                   <Card.Text className="aboutUsCardText">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  Mechanical Engineer <br/> 26 years old <br/> Upcoming Full Stack Developer
                   </Card.Text>
                   <a href="https://github.com/Mahmoud-M-Hamdan" target="_blank">
                     <FaGithub className="gitHub" />{" "}
@@ -83,11 +80,10 @@ class AboutUs extends Component {
                 <Card.Img className="cardImg" variant="top" src={wesam} />
                 <Card.Body>
                   <Card.Title className="title">
-                    Wesam Alqawasmeh <br /> <p>Full Stack Web Developer</p>
+                    Wesam Qawasmeh <br /> <p>Full Stack Web Developer</p>
                   </Card.Title>
                   <Card.Text className="aboutUsCardText">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    A 23 years old Full Stack Developer, with a Civil Engineering background from BAU-FET
                   </Card.Text>
                   <a href="https://github.com/Wesam-Alqawasmeh" target="_blank">
                     <FaGithub className="gitHub" />{" "}
@@ -101,11 +97,10 @@ class AboutUs extends Component {
                 <Card.Img className="cardImg" variant="top" src={samaki} />
                 <Card.Body>
                   <Card.Title className="title">
-                    Mohammed Alsamaki <br /> <p>Full Stack Web Developer</p>
+                    Mohammed Samaki <br /> <p>Full Stack Web Developer</p>
                   </Card.Title>
                   <Card.Text className="aboutUsCardText">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    A 25 year old Chemical Engineer graduate from BAU, with a good background in coding
                   </Card.Text>
                   <a href="https://github.com/mohammedalsamki" target="_blank">
                     <FaGithub className="gitHub" />{" "}

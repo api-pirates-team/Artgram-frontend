@@ -26,6 +26,7 @@
   width: 200px;
   margin: auto;
   filter: grayscale(1);
+  object-fit: cover;
 }
 
 .cardImg:hover{
@@ -96,12 +97,14 @@
   font-weight: 800;
   font-size: 20px;
   color: white;
+  margin-left: -3px;
 }
 
 .title p {
   margin-top: 10px;
   font-size: 15px;
   font-weight: 500;
+  margin-bottom: -20px;
 }
 
 .gitHub{
