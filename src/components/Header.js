@@ -12,6 +12,7 @@ class Header extends Component {
     super(props);
     this.state = {
       scrolling: false,
+      loadingUser: false,
     };
   }
 
@@ -25,6 +26,7 @@ class Header extends Component {
         });
   };
 
+  // HERE
   createUser = (username, email, img) => {
     let config = {
       method: "POST",
@@ -67,7 +69,8 @@ class Header extends Component {
                 ) : (
                   <LoginButton />
                 )}
-                {this.props.auth0.isAuthenticated && 
+                {/* for creating new users*/}
+                {this.props.auth0.isAuthenticated && !this.props.gotUserFlag &&
                   this.createUser(
                     this.props.auth0.user.name,
                     this.props.auth0.user.email,

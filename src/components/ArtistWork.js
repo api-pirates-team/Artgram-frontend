@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { Col, Container, Row, Button, Modal, Form } from 'react-bootstrap';
+import { Col, Container, Row, Button, Modal, Form, Spinner } from 'react-bootstrap';
 import { withAuth0 } from "@auth0/auth0-react";
 import OneWork from './OneWork';
 import "../CSS/ArtistGallery.css";
@@ -22,7 +22,7 @@ class ArtistWork extends Component {
             workImage: "",
             isCreateOpen: false,
             isUpdateOpen: false,
-            isArtist: false
+            addingSpinner: false
         }
     }
 
@@ -80,26 +80,35 @@ class ArtistWork extends Component {
     }
     handleCreateWork = (event) => {
         event.preventDefault();
+        this.setState({
+            addingSpinner: true,
+        })
         let config = {
             method: "POST",
             baseURL: `https://artgram-backend.herokuapp.com/add-work`,
             data: {
-                artistName: this.props.auth0.user.name,
-                artistpp: this.props.auth0.picture,
-                workTitle: this.state.workTitle,
-                artistContactInfo: this.state.artistContactInfo,
-                artistLocation: this.state.artistLocation,
-                workDate: this.state.workDate,
-                workDimensions: this.state.workDimensions,
-                workImage: this.state.workImage
+                "artistName": this.props.auth0.user.name,
+                "artistpp": this.props.auth0.picture,
+                "workTitle": this.state.workTitle,
+                "artistContactInfo": this.state.artistContactInfo,
+                "artistLocation": this.state.artistLocation,
+                "workDate": this.state.workDate,
+                "workDimensions": this.state.workDimensions,
+                "workImage": this.state.workImage
             }
         };
         axios(config).then(response => {
             this.setState({
-                artWork: response.data
-            })
+                artWork: [...this.state.artWork, response.data]
+            });
         });
-        window.location.reload();
+        setTimeout(() => {
+            this.forceUpdate();
+            this.setState({
+                addingSpinner: false,
+                isCreateOpen: false
+            })
+        }, 1000)
     }
     handleDeleteWork = (id) => {
         let config = {
@@ -169,7 +178,9 @@ class ArtistWork extends Component {
                             <Modal.Header closeButton>
                                 <Modal.Title>Add Your Work</Modal.Title>
                             </Modal.Header>
-                            <Modal.Body>
+                            {this.state.addingSpinner ? <div class="d-flex justify-content-center" style={{marginTop: "40px", marginBottom: "40px"}}>
+                                <div class="spinner-border" role="status"></div>
+                            </div> : <Modal.Body>
                                 <Row xs={1} md={3} className="g-3">
                                     <Col>
                                         <Form.Control value={user.name} onChange={this.handleworkArtistName} />
@@ -202,12 +213,12 @@ class ArtistWork extends Component {
                                         </Form.Group>
                                     </Col>
                                 </Row>
-                            </Modal.Body>
+                            </Modal.Body>}
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={this.closeCreateModal}>
                                     Close
                                 </Button>
-                                <Button type="submit" variant="success">Create A Work</Button>
+                                <Button type="submit" style={{ backgroundColor: '#00fff291' }}>Post</Button>
                             </Modal.Footer>
                         </Form>
                     </Modal>
@@ -268,7 +279,7 @@ class ArtistWork extends Component {
                     <br />
                     <Container className='artistsGallery'>
                         <Row className='worksContainer'>
-                            <Col xs={1}>{this.state.isArtist ? <BsToggleOn onClick={()=>{this.setState({isArtist:false})}} size={35} style={{color:'white'}}/> : <BsToggleOff onClick={()=>{this.setState({isArtist:true})}} size={35} style={{color:'white'}}>artists view off</BsToggleOff>}</Col>
+                            <Col xs={1}>{this.state.isArtist ? <BsToggleOn onClick={() => { this.setState({ isArtist: false }) }} size={35} style={{ color: 'white' }} /> : <BsToggleOff onClick={() => { this.setState({ isArtist: true }) }} size={35} style={{ color: 'white' }}>artists view off</BsToggleOff>}</Col>
                             <Col xs={10}><h3 className='worksContainerHeader'>Your Works</h3></Col>
                             <Col xs={1}>{this.state.isArtist && <Button onClick={this.openCreateModal} variant="none" className="add"><span>Add</span>
                             </Button>}</Col>

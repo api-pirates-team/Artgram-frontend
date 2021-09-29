@@ -14,7 +14,7 @@ class HomePage extends Component {
         return (
             <>
                 <ArtistGallery updateUserData={this.props.updateUserData} />
-                <ArtistWork />
+                <ArtistWork currentUserDB={this.props.currentUserDB}/>
             </>
         )
     }
