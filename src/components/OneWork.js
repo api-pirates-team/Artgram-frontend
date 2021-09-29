@@ -73,13 +73,13 @@ class OneWork extends Component {
                                 </Card>
                             })}
                         </section>
-                        <section>
+                        {/* <section>
                             <Form onSubmit={this.handleCreateComment}>
                                 <Form.Control placeholder="add comment" onChange={this.handleCommentInput} />
                                 <Button type="submit" > Comment </Button>
                             </Form>
 
-                        </section>
+                        </section> */}
 
                     </div>
                 </div>
