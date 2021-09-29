@@ -68,12 +68,12 @@ text-align: center;
 
 .closingIcon {
    position: fixed;
-   top: 10px;
-   right: 10px;
+   top: 20px;
+   right: 20px;
    width: 2rem;
    height: 2rem;
    padding: 5px;
-   background-color: rgba(0,0,0,0.4);
+   /* background-color: rgba(0,0,0,0.4); */
    color:white;
    cursor: pointer;
 }
@@ -102,4 +102,10 @@ text-align: center;
 
 svg {
    cursor: pointer;
+}
+
+.openImage {
+   position: absolute;
+   top: 27px;
+   right: 22px;
 }
