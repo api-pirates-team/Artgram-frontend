@@ -53,6 +53,11 @@ class App extends Component {
           });
           console.log('we have the user data from the DB')
         });}
+        if(!this.state.authFinishedFlag) {
+          this.setState({
+            spinnerLoading: false,
+          })
+        }
       }, 4000)
   }
 
