@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-import { Card, Button } from "react-bootstrap";
-import GalleryModal from "./GalleryModal";
+import axios from "axios";
+import { Card, Button, Row, Col } from "react-bootstrap";
+import { BsX } from "react-icons/bs";
 import { withAuth0 } from "@auth0/auth0-react";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
-// import ButtonLikes from './Button';
 import '../CSS/CardStyle.css'
 import swal from 'sweetalert';
-// import { FcLike } from "react-icons/fc";
-import { FcShare } from "react-icons/fc";
-import { CgMoreO } from "react-icons/cg";
-
+import { CgMoreAlt } from "react-icons/cg";
 
 class GalleryCard extends Component {
   constructor(props) {
@@ -17,10 +14,10 @@ class GalleryCard extends Component {
     this.state = {
       idUser: "",
       showModal: false,
-      count:0,
+      count: this.props.likesCounter,
       likeClicked: false,
       show: false,
-
+      model: false,
     };
   };
   handleShow = () => {
@@ -33,10 +30,12 @@ class GalleryCard extends Component {
       show: false,
     })
   };
-  incrementCount= () => {
-    this.setState({
-      count:this.state.count+1,
-      likeClicked: true
+
+  incrementCount = () => {
+    this.setState({ likeClicked: true });
+    axios.put(`${process.env.REACT_APP_BACKEND_SERVER}/liked-item/${this.props.id}`, { "like?": "yes" }).then(res => {
+      this.setState({ count: res.data.newLikes + 1 });
+      console.log(this.state.count)
     })
   }
   modalHandle = () => {
@@ -44,54 +43,57 @@ class GalleryCard extends Component {
       showModal: true,
     });
   };
-  
+
   closeModal = () => {
     this.setState({
       showModal: false,
     });
   };
 
-  render() {  
+  render() {
     return (
       <>
         <Card class="Maincard" style={{ width: "18rem", height: "450px" }}>
           <Card.Img
-          class="Maincard"
+            class="Maincard"
             variant="top"
             src={this.props.imageUrl}
             style={{ height: "300px" }}
           />
           <Card.Body class="Maincard">
-            <Card.Title class="Maincard">{this.props.title}</Card.Title>
-            <Button
-              variant="none"
-              onClick= 
-              {() => {
-                this.props.updateUserData(this.props.items);
-                console.log(this.props.updateUserData);
-                this.incrementCount()
-                swal("Success!", "You added this art to your like list!", "success");
-                
-              }}
-            > 
-              <FcLike style={{fontSize:"30px"}}/>
-            </Button>
-            <Button  variant="none"><FcShare style={{fontSize:"30px"}} /></Button>
-            <Button variant="none" onClick={this.modalHandle}>
-              <CgMoreO style={{fontSize:"30px"}}/>
-            </Button>
+            <Card.Title class="Maincard" style={{ 'margin-top': '10px', 'font-weight': '600', 'font-size': '18px', }}>{this.props.title}</Card.Title>
+            <small>{this.state.count} likes</small><br /><br />
+            <div className="svgsHolder">
+              {this.state.likeClicked ? <Button variant="none"><FcLike style={{ fontSize: "25px" }} /></Button> : <Button
+                variant="none"
+                onClick=
+                {() => {
+                  this.props.updateUserData(this.props.items);
+                  console.log(this.props.updateUserData);
+                  this.incrementCount()
+                  swal("Success!", "You've added this piece to your feed!", "success");
+                }}><FcLikePlaceholder style={{ fontSize: "25px" }} /></Button>}
+              <Button variant="none" onClick={() => this.setState({ model: true })}>
+                <CgMoreAlt style={{ fontSize: "25px", color: "white" }} />
+              </Button>
+            </div>
             <Card.Text></Card.Text>
           </Card.Body>
         </Card>
-        <GalleryModal
-          closeModal={this.closeModal}
-          showModal={this.state.showModal}
-          imageUrl={this.props.imageUrl}
-          title={this.props.title}
-          displaydate={this.props.displaydate}
-          artistName={this.props.artistName}
-          dimensions={this.props.dimensions}
-        />
+
+        <div className={this.state.model ? 'model open' : 'model'}>
+          <BsX className='closingIcon' onClick={() => this.setState({ model: false })} />
+          <Row>
+            <Col><img src={this.props.imageUrl} alt='' /></Col>
+            <Col className='imageData'>
+              <h3>{this.props.title}</h3>
+              <p>{this.state.count} likes</p>
+              <p>Artist: {this.props.artistName}</p>
+              <p>Date year: {this.props.displaydate}</p>
+              <p>Dimensions: {this.props.dimensions}</p>
+            </Col>
+          </Row>
+        </div>
       </>
     );
   }
