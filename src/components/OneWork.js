@@ -27,23 +27,17 @@ class OneWork extends Component {
         };
         let config = {
             method: "PUT",
-            baseURL: `http://localhost:8001/add-comment/${this.props.workId}`,
+            baseURL: `${process.env.REACT_APP_BACKEND_SERVER}/add-comment/${this.props.workId}`,
             data: object
         }
-        console.log("hiii", this.state.theComment)
         setTimeout(() => {
             axios(config).then((res) => {
-                console.log(2, res.data)
-                // let data=JSON.parse(res.data)
                 this.setState({
                     allComment: res.data,
                     commentReady: true
                 })
-                console.log(3, this.state.allComment)
             })
         }, 2550)
-        // this.forceUpdate()
-        // window.location.reload();
     }
 
     render() {
@@ -83,12 +77,14 @@ class OneWork extends Component {
                                 </>
                             })}
                         </section>
-                        <section>
+                        {<section>
                             <Form onSubmit={this.handleCreateComment}>
                                 <Form.Control placeholder="add comment" onChange={this.handleCommentInput} />
                                 <Button type="submit" > Comment </Button>
                             </Form>
-                        </section>
+
+                        </section>}
+
                     </div>
                 </div>
             </>

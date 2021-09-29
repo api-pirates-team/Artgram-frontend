@@ -78,9 +78,10 @@
 /* ********************** Active header ********************** */
 
 .nav_active {
-    background-color: white;
+    background-color: #ffffffd9;
     position: sticky;
-    top:0%;
+    height: 55px;
+    top: 0%;
     box-sizing: border-box;
     z-index: 1;
 }

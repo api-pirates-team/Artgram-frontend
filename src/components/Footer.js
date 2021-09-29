@@ -27,12 +27,12 @@ class Footer extends Component {
               </Row>
               <Row>
                 <Col>
-                  <FaEnvelope className="icons" />
+                <a href='https://mail.google.com/'><FaEnvelope className="icons" /></a>
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <FaGithub className="icons" />
+                  <a href='https://github.com/api-pirates-team'><FaGithub className="icons"/></a>
                 </Col>
                 <Col>
                   <FaWhatsapp className="icons" />
@@ -42,9 +42,12 @@ class Footer extends Component {
           </Col>
           <Col className="col">
             <h3>About Us</h3>
+            <p>Led by junior Full Stack Developers, we are an art social media
+            platform where you get to deal directly with artists and art lovers</p>
           </Col>
           <Col className="col">
             <h3>Resources</h3>
+            <p className="resourcesP"> ▸ Harvard Art Museums API <br/> ▸ Art Institute of Chicago API <br/> ▸ Rijksstudio API</p>
           </Col>
         </Row>
         <div id="copyRightDiv">

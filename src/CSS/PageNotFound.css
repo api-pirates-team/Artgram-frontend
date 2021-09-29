@@ -1,7 +1,7 @@
 .pageNotFound {
     width: 100vw ;
     height: 100vh ;
-    background-color: #00494a;
+    background-image: linear-gradient(rgb(0, 0, 0), rgb(17, 124, 173), rgb(0, 0, 0));
     display: flex ;
     flex-direction: column ;
     justify-content: center;
