@@ -10,8 +10,9 @@ class OneWork extends Component {
         super(props);
         this.state = ({
             model: false,
-            allComment: [],
-            theComment: ""
+            allComment: [{}],
+            theComment: "",
+            commentReady: false
         });
     }
     handleCommentInput = (event) => {
@@ -21,20 +22,27 @@ class OneWork extends Component {
     }
     handleCreateComment = (event) => {
         event.preventDefault();
+        let object = {
+            msg: this.state.theComment,
+        };
         let config = {
-            method: "POST",
-            baseUrl: `${process.env.REACT_APP_BACKEND_SERVER}/add-comment/${this.props.workId}`,
-            data: { comment: this.state.theComment }
+            method: "PUT",
+            baseURL: `http://localhost:8001/add-comment/${this.props.workId}`,
+            data: object
         }
+        console.log("hiii", this.state.theComment)
         setTimeout(() => {
             axios(config).then((res) => {
-                console.log(res.data)
+                console.log(2, res.data)
+                // let data=JSON.parse(res.data)
                 this.setState({
-                    allComment: res.data
+                    allComment: res.data,
+                    commentReady: true
                 })
-                console.log(this.state.allComment)
+                console.log(3, this.state.allComment)
             })
         }, 2550)
+        // this.forceUpdate()
         // window.location.reload();
     }
 
@@ -67,10 +75,12 @@ class OneWork extends Component {
                             </div>
                         </section>
                         <section>
-                            {this.state.allComment.length > 0 && this.state.allComment.map(elem => {
-                                return <Card>
-                                    <Card.Body>{elem.comment}</Card.Body>
-                                </Card>
+                            {this.state.commentReady && this.state.allComment.map((elem,index) => {
+                                console.log(index,elem)
+                                return <> 
+                                    <p>{elem.msg ? elem.msg : "no cooment"}</p>
+                                
+                                </>
                             })}
                         </section>
                         <section>
@@ -78,9 +88,7 @@ class OneWork extends Component {
                                 <Form.Control placeholder="add comment" onChange={this.handleCommentInput} />
                                 <Button type="submit" > Comment </Button>
                             </Form>
-
                         </section>
-
                     </div>
                 </div>
             </>

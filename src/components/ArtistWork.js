@@ -9,7 +9,7 @@ class ArtistWork extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            artWork: [],
+            artWork: [{}],
             workId: "",
             artistName: "",
             artistpp: "",
