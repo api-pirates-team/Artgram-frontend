@@ -53,7 +53,7 @@ class GalleryCard extends Component {
   render() {
     return (
       <>
-        <Card class="Maincard" style={{ width: "18rem", height: "450px" }}>
+        <Card class="Maincard" style={{margin:'auto', width: "18rem", height: "450px" }}>
           <Card.Img
             class="Maincard"
             variant="top"
