@@ -32,7 +32,7 @@ class App extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount =async () => {
     setTimeout(async () => {
       (await this.props.auth0.isAuthenticated) &&
         this.setState({
@@ -45,11 +45,13 @@ class App extends Component {
         });
       // console.log(this.state.currentUser);
     }, 5000);
-    setTimeout(() => {
-      this.setState({
+    console.log(this.state.lodaing)
+    // setTimeout(() => {
+      await this.setState({
         lodaing: false,
       });
-    }, 2500);
+    // }, 2500);
+    console.log(this.state.lodaing)
   };
 
   updateUserData = async (data) => {
