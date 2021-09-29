@@ -34,7 +34,6 @@ class GalleryCard extends Component {
     this.setState({ likeClicked: true });
     axios.put(`${process.env.REACT_APP_BACKEND_SERVER}/liked-item/${this.props.id}`, { "like?": "yes" }).then(res => {
       this.setState({ count: res.data.newLikes + 1 });
-      console.log(this.state.count)
     })
   }
   modalHandle = () => {
@@ -68,7 +67,6 @@ class GalleryCard extends Component {
                 onClick=
                 {() => {
                   this.props.updateUserData(this.props.items);
-                  console.log(this.props.updateUserData);
                   this.incrementCount()
                   swal("Success!", "You've added this piece to your feed!", "success");
                 }}><BsHeart style={{ fontSize: "25px", color: 'white', position: 'absolute', bottom: '78px' }} /></Button>}

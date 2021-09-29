@@ -157,7 +157,7 @@ class ArtistWork extends Component {
             });
         });
         setTimeout(() => {
-            window.location.reload();
+            this.forceUpdate();
         }, 1000);
     }
     render() {

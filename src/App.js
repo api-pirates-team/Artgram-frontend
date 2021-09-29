@@ -86,7 +86,7 @@ class App extends Component {
         {this.state.spinnerLoading ? (
           <div className="loadingDiv">
             <h1 style={{ color: "white", marginBottom: "50px" }}>
-            spinnerLoading <SyncLoader color="white" />
+            Loading <SyncLoader color="white" />
             </h1>
             <RingLoader size="250" color="white" />{" "}
           </div>
