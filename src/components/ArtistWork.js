@@ -4,6 +4,7 @@ import { Col, Container, Row, Button, Modal, Form } from 'react-bootstrap';
 import { withAuth0 } from "@auth0/auth0-react";
 import OneWork from './OneWork';
 import "../CSS/ArtistGallery.css";
+import { BsToggleOn, BsToggleOff } from "react-icons/bs";
 
 class ArtistWork extends Component {
     constructor(props) {
@@ -20,7 +21,8 @@ class ArtistWork extends Component {
             workDimensions: "",
             workImage: "",
             isCreateOpen: false,
-            isUpdateOpen: false
+            isUpdateOpen: false,
+            isArtist: false
         }
     }
 
@@ -266,9 +268,10 @@ class ArtistWork extends Component {
                     <br />
                     <Container className='artistsGallery'>
                         <Row className='worksContainer'>
-                            <Col xs={11}><h3 className='worksContainerHeader'>Your Works</h3></Col>
-                            <Col xs={1}><Button onClick={this.openCreateModal} variant="none" className="add"><span>Add</span>
-                            </Button></Col>
+                            <Col xs={1}>{this.state.isArtist ? <BsToggleOn onClick={()=>{this.setState({isArtist:false})}} size={35} style={{color:'white'}}/> : <BsToggleOff onClick={()=>{this.setState({isArtist:true})}} size={35} style={{color:'white'}}>artists view off</BsToggleOff>}</Col>
+                            <Col xs={10}><h3 className='worksContainerHeader'>Your Works</h3></Col>
+                            <Col xs={1}>{this.state.isArtist && <Button onClick={this.openCreateModal} variant="none" className="add"><span>Add</span>
+                            </Button>}</Col>
                         </Row>
                         <Row xs={1} md={3} className="g-3">
                             {this.state.artWork.map((elem, index) => {

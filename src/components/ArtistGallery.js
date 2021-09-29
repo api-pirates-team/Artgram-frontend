@@ -35,7 +35,6 @@ class ArtistGallery extends Component {
   render() {
     return (
       <>
-
         <Container style={{ width: "80%", marginBottom: "100px" }}>
           <h2 id="h2">Museums Gallery Collection</h2>
           <Carousel fade style={{ zIndex: "0" }}>
