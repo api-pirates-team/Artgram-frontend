@@ -90,47 +90,62 @@
   text-align: center;
 }
 
-.insideModel {
-  display: flex;
-  flex-direction: column;
-  height: 90vh;
-  width: 90vw;
-}
-
-.insideModel img {
-  height: 380px;
-  width: 500px;
-  object-fit: cover;
-}
-
-.insideModel h3 {
+h3 {
   text-align: center;
+  height: 10vh;
+  margin-top: 20vh;
+  padding-bottom: 2vh;
+  border-bottom: 1px solid grey;
 }
 
-.myCard {
-  border: 0px solid rgba(0,0,0,.125) !important;
-  margin: auto !important;
-}
-
-.myCardButtons {
-  background-color: black;
-}
-
-.insideDSVG {
-  color: tomato;
-  position: absolute;
-  top: 50px;
-  right: 20px;
-}
-
-.insideESVG {
-  color: rgb(71, 99, 255);
-  position: absolute;
-  top: 50px;
-  right: 50px;
-}
-
-.sectionForEdit {
+.svgButtons {
+  width: 60px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  margin: 10px 30px 10px auto;
+}
+
+p {
+  padding: 40px 0 7px 0;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 23px;
+  margin-left: 2px;
+}
+
+small {
+  padding: 0 0 20px 0;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 19px;
+}
+
+.commentsForm {
+  width: 70%;
+}
+
+.commentsForm form {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+}
+
+.commentsForm button {
+  margin-left: 5px;
+}
+
+.commentsArea {
+  width: 520px;
+  height: auto;
+  color: rgb(0, 0, 0) !important;
+  background-color: rgba(255, 255, 255, 0.904);
+  margin-bottom: 2px;
+  padding: 0 0 0 10px;
+  font-size: 20px;
+}
+
+.commentsArea1 {
+  margin-top: 20px;
+  margin-left: 0;
 }
