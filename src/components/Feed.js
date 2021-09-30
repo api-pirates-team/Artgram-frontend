@@ -60,9 +60,8 @@ class Feed extends Component {
           <Row md={3} className="g-3">
             <Col xs={4}><Image src={this.props.currentUserDB.pp} roundedCircle style={{'box-shadow': '2px 2px 0px 1px #ffffff'}}/></Col>
             <Col xs={12}>
-              <h3>{this.props.currentUserDB.username}</h3>
-              <p className='profileData'>Jordan, {this.state.likedArtsData.length} likes</p>
-              <p className='profileData'></p>
+              <h3  style={{'margin-top': '-10px' }}>{this.props.currentUserDB.username}</h3>
+              <p  style={{'margin-top': '-10px' }} className='profileData'>Jordan, {this.state.likedArtsData.length} likes</p>
             </Col>
           </Row>
         </Container>
