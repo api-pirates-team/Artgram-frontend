@@ -280,7 +280,7 @@ class ArtistWork extends Component {
                     <Container className='artistsGallery'>
                         <Row className='worksContainer'>
                             <Col xs={1}>{this.state.isArtist ? <BsToggleOn onClick={() => { this.setState({ isArtist: false }) }} size={35} style={{ color: 'white' }} /> : <BsToggleOff onClick={() => { this.setState({ isArtist: true }) }} size={35} style={{ color: 'white' }}>artists view off</BsToggleOff>}</Col>
-                            <Col xs={10}><h3 className='worksContainerHeader'>Your Works</h3></Col>
+                            <Col xs={10}><h3 className='worksContainerHeader'>Our Artists Works</h3></Col>
                             <Col xs={1}>{this.state.isArtist && <Button onClick={this.openCreateModal} variant="none" className="add"><span>Add</span>
                             </Button>}</Col>
                         </Row>

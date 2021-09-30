@@ -45,7 +45,7 @@ class OneWork extends Component {
         return (
             <>
                 <Col>
-                    <Card className='myCard' style={{ width: '18rem' }}>
+                    <Card className='myCard' style={{ width: '18rem', margin:"auto" }}>
                         <Card.Img variant="top" src={this.props.workImage} style={{ "height": "400px", "object-fit": "cover", }} onClick={() => this.setState({ model: true })} />
                     </Card>
                 </Col>
